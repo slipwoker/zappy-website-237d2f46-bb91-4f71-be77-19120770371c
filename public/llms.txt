@@ -1,6 +1,4 @@
-# המרכז לגמילה ממיגרנות ברפואה סינית ודיקור — Generative Engine Optimization Map
-
-> A רפואה משלימה business.
+# Business — Generative Engine Optimization Map
 
 ---
 
@@ -22,6 +20,9 @@ https://center-for-migraine-relief-chi.zappy5.app/about
 https://center-for-migraine-relief-chi.zappy5.app/contact
 צרו קשר עם המרכז לגמילה ממיגרנות ברפואה סינית ודיקור. קבעו ייעוץ חינם וגלו איך טיפול דיקור למיגרנות יכול לשנות את חייכם.
 
+### בלוג - מאמרים ועדכונים
+https://center-for-migraine-relief-chi.zappy5.app/blog
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -40,15 +41,7 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About המרכז לגמילה ממיגרנות ברפואה סינית ודיקור
-המרכז לגמילה ממיגרנות ברפואה סינית ודיקור is a business in the רפואה משלימה industry.
-
-## Target Audience
-אנשים הסובלים ממיגרנות
-
-## Industry
-רפואה משלימה
-
+## About Business
 ---
 
 # Additional Resources

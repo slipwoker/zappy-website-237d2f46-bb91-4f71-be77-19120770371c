@@ -1,0 +1,495 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="בלוג המרכז לגמילה ממיגרנות - מאמרים מקצועיים על טיפול במיגרנות בדיקור סיני, רפואה סינית, וטיפים למניעת כאבי ראש">
+  <meta name="keywords" content="רפואה סינית לטיפול במיגרנות כרוניות, טיפול דיקור למיגרנות, דיקור סיני למיגרנות, טיפול טבעי למיגרנות ללא תרופות">
+  <title>בלוג - מאמרים ועדכונים</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>
+/* Zappy Attribution Header Styles */
+.zappy-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0px 4px 19px 0px rgba(0,0,0,0.04);
+  padding: 16px 10px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  color: #4a4a4a;
+  line-height: 21px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 21px;
+  direction: ltr !important;
+  unicode-bidi: isolate;
+}
+
+    .zappy-header p {
+      margin: 0;
+      padding: 0;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21px;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: baseline;
+      margin-bottom: 0 !important;
+      direction: ltr !important;
+    }
+
+.zappy-header .zappy-link {
+  font-weight: 700;
+  color: #4a4a4a;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.zappy-header .zappy-link:hover {
+  opacity: 0.7;
+}</style>
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '237d2f46-bb91-4f71-be77-19120770371c',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-mobile-submenu-styles">
+      /* Mobile submenu accordion styles */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu {
+          position: static !important;
+          transform: none !important;
+          box-shadow: none !important;
+          background: transparent !important;
+          margin-top: 0 !important;
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          visibility: hidden;
+          transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, padding 0.3s ease;
+          padding: 0 !important;
+          border-radius: 0 !important;
+        }
+        .sub-menu.mobile-expanded {
+          max-height: 500px !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          padding: 8px 0 8px 16px !important;
+        }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded, html[lang="ar"] .sub-menu.mobile-expanded {
+          padding: 8px 16px 8px 0 !important;
+        }
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu {
+          opacity: 0; visibility: hidden; pointer-events: none;
+        }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded {
+          opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
+        }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) {
+          display: flex !important; flex-wrap: wrap !important; align-items: center !important;
+        }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a {
+          flex: 1 !important;
+        }
+        .mobile-submenu-toggle {
+          display: flex !important; align-items: center !important; justify-content: center !important;
+          width: 44px !important; height: 44px !important; background: transparent !important;
+          border: none !important; cursor: pointer !important; padding: 0 !important; margin: 0 !important;
+          flex-shrink: 0 !important; -webkit-tap-highlight-color: transparent;
+        }
+        .mobile-submenu-toggle::after {
+          content: '' !important; display: block !important; width: 0 !important; height: 0 !important;
+          border-left: 6px solid transparent !important; border-right: 6px solid transparent !important;
+          border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important;
+        }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu {
+          flex-basis: 100% !important; width: 100% !important;
+        }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; font-size: 14px !important; }
+        .sub-menu a:hover { background-color: transparent !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body><div id="zappy-attribution-header" class="zappy-header" style="display: none;">
+  <p>Happily created by&nbsp;<a href="https://zappy5.com" target="_blank" rel="noopener noreferrer" class="zappy-link">Zappy</a></p>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="container nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="המרכז לגמילה ממיגרנות ברפואה סינית ודיקור" class="logo">
+      </a>
+    </div>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="פתח תפריט">
+      <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
+      <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
+    </button>
+
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="/" class="nav-link">דף הבית</a></li>
+      <li><a href="/about" class="nav-link">אודות</a></li>
+      <li><a href="/services" class="nav-link">טיפולים</a></li>
+      <li><a href="/blog" class="nav-link active">בלוג</a></li>
+      <li><a href="/contact" class="nav-link">צור קשר</a></li>
+    
+        <li><a href="/blog">בלוג</a></li></ul>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero Section -->
+  <section class="hero-section blog-hero">
+    <div class="container">
+      <div class="hero-content text-center">
+        <h1 class="hero-title">בלוג - מאמרים ועדכונים</h1>
+        <p class="hero-subtitle">כל מה שרציתם לדעת על טיפול במיגרנות ברפואה סינית</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction Section -->
+  <section class="section intro-section">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="intro-text">
+          <p class="lead-text">
+            ברוכים הבאים לבלוג שלנו! כאן תמצאו מאמרים מקצועיים, טיפים שימושיים ומידע עדכני על טיפול במיגרנות באמצעות דיקור סיני ורפואה סינית מסורתית. המטרה שלנו היא לספק לכם כלים וידע שיעזרו לכם להבין טוב יותר את המיגרנות ואת דרכי הטיפול הטבעיות והיעילות שעומדות לרשותכם.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Articles Section -->
+  <section class="section blog-articles-section">
+    <div class="container">
+      <div class="articles-grid">
+        
+        <!-- Article 1 -->
+        <article class="blog-article-card">
+          <div class="article-header">
+            <div class="article-meta">
+              <span class="article-date">15 בינואר 2025</span>
+            </div>
+            <h2 class="article-title">איך דיקור סיני יכול לעזור במיגרנות כרוניות</h2>
+          </div>
+          <div class="article-content">
+            <p class="article-excerpt">
+              גלו את המנגנונים המדעיים מאחורי היעילות של דיקור סיני בטיפול במיגרנות ומדוע זו שיטה מומלצת על ידי ארגוני בריאות בינלאומיים
+            </p>
+            <div class="article-body">
+              <p>
+                דיקור סיני הוא שיטת טיפול עתיקה בת אלפי שנים שהוכחה כיעילה במיוחד לטיפול במיגרנות כרוניות. המחקר המודרני מאשר את מה שהרפואה הסינית ידעה כבר מזמן - דיקור משפיע על מערכת העצבים, משחרר אנדורפינים טבעיים, ומסייע באיזון זרימת הדם והאנרגיה בגוף.
+              </p>
+              <h3>המנגנונים המדעיים מאחורי הדיקור</h3>
+              <p>
+                מחקרים קליניים רבים הראו כי דיקור סיני מפעיל מספר מנגנונים פיזיולוגיים בגוף. ראשית, החדרת המחטים מעוררת את מערכת העצבים לשחרר נוירוטרנסמיטורים כמו סרוטונין ואנדורפינים - חומרים טבעיים המפחיתים כאב ומשפרים את מצב הרוח. שנית, הדיקור משפר את זרימת הדם למוח, מה שמסייע בהפחתת הדלקות ובאיזון הלחץ התוך גולגולתי.
+              </p>
+              <h3>מחקרים קליניים ותוצאות</h3>
+              <p>
+                ארגון הבריאות העולמי (WHO) והאקדמיה האמריקאית לנוירולוגיה מכירים בדיקור כטיפול יעיל למיגרנות. מחקר שפורסם ב-JAMA הראה כי חולים שקיבלו טיפולי דיקור חוו הפחתה של 50% בתדירות התקפי המיגרנה לאורך 6 חודשים. יתרה מכך, הטיפול היה ללא תופעות לוואי משמעותיות, בניגוד לתרופות כימיות רבות.
+              </p>
+              <h3>היתרונות של דיקור על פני טיפולים אחרים</h3>
+              <p>
+                אחד היתרונות המרכזיים של דיקור סיני הוא שהוא מטפל בשורש הבעיה ולא רק בתסמינים. בעוד שתרופות משככות כאב מספקות הקלה זמנית, דיקור עובד על איזון כל מערכות הגוף - מערכת העיכול, מערכת העצבים, והמערכת ההורמונלית. כך נוצר שיפור ארוך טווח ולא רק הקלה מיידית. בנוסף, הדיקור בטוח לחלוטין, ללא סיכון לתלות או תופעות לוואי חמורות.
+              </p>
+              <h3>מה לצפות מטיפול דיקור למיגרנות</h3>
+              <p>
+                טיפול דיקור למיגרנות כולל בדרך כלל סדרה של פגישות, כאשר כל פגישה נמשכת כ-45-60 דקות. במהלך הטיפול, המטפל מחדיר מחטים דקות מאוד לנקודות ספציפיות בגוף, בהתאם לאבחון האישי של המטפל. רוב המטופלים מדווחים על תחושת רגיעה עמוקה במהלך הטיפול, ושיפור הדרגתי בתדירות ובעוצמת התקפי המיגרנה לאורך זמן.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="blog-article-card">
+          <div class="article-header">
+            <div class="article-meta">
+              <span class="article-date">10 בינואר 2025</span>
+            </div>
+            <h2 class="article-title">5 טיפים למניעת מיגרנות בחיי היומיום</h2>
+          </div>
+          <div class="article-content">
+            <p class="article-excerpt">
+              שינויים פשוטים בשגרת החיים שלכם שיכולים להפחית משמעותית את תדירות התקפי המיגרנה
+            </p>
+            <div class="article-body">
+              <p>
+                מניעת מיגרנות מתחילה בהבנת הגורמים המעוררים והרגלי חיים נכונים. במאמר זה נחלוק איתכם 5 טיפים מעשיים שמבוססים על עקרונות הרפואה הסינית והמחקר המודרני. יישום הטיפים הללו יכול להפחית באופן משמעותי את תדירות ועוצמת התקפי המיגרנה, ולשפר את איכות החיים הכללית.
+              </p>
+              <h3>טיפ 1: שמירה על שגרת שינה קבועה</h3>
+              <p>
+                הגוף שלנו אוהב סדר וקביעות. הרפואה הסינית מדגישה את חשיבות האיזון בין יין ליאנג, ושינה סדירה היא חלק מהותי מאיזון זה. מחקרים מראים כי שינויים בשעות השינה, חוסר שינה או שינה מוגזמת יכולים לעורר התקפי מיגרנה. השתדלו ללכת לישון ולקום באותן השעות כל יום, כולל בסופי שבוע. שאפו ל-7-8 שעות שינה איכותיות בלילה, ושמרו על חדר שינה חשוך, שקט וקריר.
+              </p>
+              <h3>טיפ 2: תזונה מאוזנת והימנעות ממזונות מעוררים</h3>
+              <p>
+                התזונה משחקת תפקיד מרכזי במניעת מיגרנות. הרפואה הסינית מלמדת שמזונות מסוימים יכולים ליצור "חום" או "לחות" בגוף, מה שעלול לעורר מיגרנות. מזונות נפוצים שעלולים לעורר מיגרנה כוללים: גבינות מיושנות, שוקולד, קפאין (בכמויות גדולות), אלכוהול (במיוחד יין אדום), מזונות מעובדים עם תוספי MSG, ונקניקים עם ניטרטים. במקום זאת, התמקדו במזונות טריים, ירקות ירוקים, דגנים מלאים, וחלבונים רזים. אכלו ארוחות קבועות ואל תדלגו על ארוחות - רמת סוכר נמוכה בדם היא גורם מעורר נפוץ.
+              </p>
+              <h3>טיפ 3: ניהול מתח באמצעות מדיטציה ונשימות</h3>
+              <p>
+                מתח הוא אחד הגורמים המעוררים השכיחים ביותר למיגרנות. הרפואה הסינית מציעה טכניקות עתיקות לניהול מתח, כמו צ'י גונג ומדיטציה. התחילו עם 10 דקות של נשימות עמוקות בכל יום - שאפו לאט דרך האף למשך 4 שניות, החזיקו למשך 4 שניות, ונשפו דרך הפה למשך 6 שניות. תרגול זה מפעיל את מערכת העצבים הפאראסימפתטית, מפחית את רמות הקורטיזול, ומסייע באיזון האנרגיה בגוף. שקלו גם להצטרף לשיעורי יוגה או טאי צ'י.
+              </p>
+              <h3>טיפ 4: פעילות גופנית סדירה ומתונה</h3>
+              <p>
+                פעילות גופנית סדירה משפרת את זרימת הדם, משחררת אנדורפינים, ומסייעת באיזון ההורמונים - כל אלה תורמים למניעת מיגרנות. עם זאת, חשוב להתחיל בהדרגה ולהימנע מפעילות אינטנסיבית מדי שעלולה דווקא לעורר מיגרנה. הרפואה הסינית ממליצה על פעילות מתונה כמו הליכה מהירה, שחייה, או רכיבה על אופניים למשך 30 דקות, 4-5 פעמים בשבוע. הקפידו להתחייב ללוח זמנים קבוע, עדיף פחות פעמים אך בימים ושעות קבועות מאשר יותר פעילות בשמנים משתנים</p></div></div></article></div></div></section></main>
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+    })();
+    </script>
+    <script src="/script.js"></script>
+</body></html>
