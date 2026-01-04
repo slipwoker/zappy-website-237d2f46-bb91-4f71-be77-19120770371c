@@ -1,60 +1,50 @@
-# המרכז לגמילה ממיגרנות ברפואה סינית ודיקור — Generative Engine Optimization Map
-
-> A רפואה משלימה business.
+# Business — Generative Engine Optimization Map
 
 ---
 
 ## Pages
 
 ### דף הבית
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com
+https://center-for-migraine-relief-chi.zappy5.app
 גלו טיפול דיקור למיגרנות מקצועי שמביא תוצאות אמיתיות. צרו קשר עוד היום לייעוץ חינם!
 
 ### טיפולים
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/services
+https://center-for-migraine-relief-chi.zappy5.app/services
 גלו את מגוון הטיפולים המקצועיים שלנו ברפואה סינית לטיפול במיגרנות כרוניות. דיקור, צמחי מרפא ושיטות מסורתיות מוכחות.
 
 ### אודות
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/about
+https://center-for-migraine-relief-chi.zappy5.app/about
 הכירו את המרכז שלנו לגמילה ממיגרנות ברפואה סינית ודיקור. צוות מקצועי עם ניסיון של למעלה מ-15 שנה בטיפול דיקור למיגרנות.
 
 ### צור קשר
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/contact
+https://center-for-migraine-relief-chi.zappy5.app/contact
 צרו קשר עם המרכז לגמילה ממיגרנות ברפואה סינית ודיקור. קבעו ייעוץ חינם וגלו איך טיפול דיקור למיגרנות יכול לשנות את חייכם.
 
 ### בלוג - מאמרים ועדכונים
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/blog
+https://center-for-migraine-relief-chi.zappy5.app/blog
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/privacy
+https://center-for-migraine-relief-chi.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/terms
+https://center-for-migraine-relief-chi.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/accessibility
+https://center-for-migraine-relief-chi.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About המרכז לגמילה ממיגרנות ברפואה סינית ודיקור
-המרכז לגמילה ממיגרנות ברפואה סינית ודיקור is a business in the רפואה משלימה industry.
-
-## Target Audience
-אנשים הסובלים ממיגרנות
-
-## Industry
-רפואה משלימה
-
+## About Business
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/sitemap.xml
-- **Robots.txt**: https://zappy-site-237d2f46-bb91-4f71-be77.onrender.com/robots.txt
+- **Sitemap**: https://center-for-migraine-relief-chi.zappy5.app/sitemap.xml
+- **Robots.txt**: https://center-for-migraine-relief-chi.zappy5.app/robots.txt
