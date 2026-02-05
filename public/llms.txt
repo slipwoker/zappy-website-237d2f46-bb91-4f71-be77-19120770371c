@@ -1,6 +1,4 @@
-# המרכז לגמילה ממיגרנות ברפואה סינית ודיקור — Generative Engine Optimization Map
-
-> A רפואה משלימה business.
+# Business — Generative Engine Optimization Map
 
 ---
 
@@ -47,15 +45,7 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About המרכז לגמילה ממיגרנות ברפואה סינית ודיקור
-המרכז לגמילה ממיגרנות ברפואה סינית ודיקור is a business in the רפואה משלימה industry.
-
-## Target Audience
-אנשים הסובלים ממיגרנות
-
-## Industry
-רפואה משלימה
-
+## About Business
 ---
 
 # Additional Resources
