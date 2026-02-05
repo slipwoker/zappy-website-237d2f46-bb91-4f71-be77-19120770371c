@@ -300,6 +300,7 @@
         .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
         .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
         .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
         .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
         .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
         .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
@@ -327,16 +328,16 @@
       
       <button class="mobile-toggle" id="mobileToggle" aria-label="פתח תפריט">
         <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
         </svg>
         <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
-          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
         </svg>
       </button>
       
       <button class="phone-header-btn" aria-label="התקשר אלינו">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
         </svg>
       </button>
       
@@ -344,7 +345,7 @@
         <li><a href="/services">טיפולים</a></li>
         <li><a href="/about">אודות</a></li>
       
-        <li><a href="/blog">בלוג</a></li></ul>
+        <li><a href="/blog">בלוג</a></li><li><a href="/contact-828248" class="nav-link">צור קשר</a></li></ul>
       
       <div class="nav-cta-container">
         <li class="nav-cta-item">
@@ -511,6 +512,14 @@
 
   
     <!-- Legal Footer -->
+    <!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>המרכז לגמילה ממיגרנות ברפואה סינית ודיקור</title>
+</head>
+<body>
     <footer class="legal-footer">
       <div class="container">
         <div class="footer-main">
@@ -519,7 +528,8 @@
           </div>
           <div class="footer-social"><a href="https://facebook.com/dikur.sini.yapani" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
 <a href="https://instagram.com/dikursini" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-<a href="https://wa.me/972544339627" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div>
+<a href="https://wa.me/972544339627" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<a href="https://tiktok.com/@migraine_il" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></div>
           <div class="footer-legal">
             <a href="/privacy" aria-label="מדיניות פרטיות">
               מדיניות פרטיות
@@ -539,6 +549,60 @@
         </div>
       </div>
     </footer>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+    <script src="/script.js"></script>
+</body>
+</html>
 
 
 <!-- Zappy Attribution Header Script -->
@@ -600,56 +664,4 @@
 })();
 </script>
     <div data-integration="accessibility:toolbar"></div>
-
-    <script id="zappy-mobile-submenu-script">
-    (function() {
-      function initMobileSubmenuToggles() {
-        if (window.innerWidth > 768) {
-          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
-          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
-          return;
-        }
-        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
-        items.forEach(function(li) {
-          if (li.querySelector('.mobile-submenu-toggle')) return;
-          var submenu = li.querySelector('.sub-menu');
-          var parentLink = li.querySelector(':scope > a');
-          if (!submenu || !parentLink) return;
-          var toggleBtn = document.createElement('button');
-          toggleBtn.className = 'mobile-submenu-toggle';
-          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
-          toggleBtn.setAttribute('type', 'button');
-          parentLink.insertAdjacentElement('afterend', toggleBtn);
-          toggleBtn.addEventListener('click', function(e) {
-            e.preventDefault(); e.stopPropagation();
-            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
-              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
-            });
-            submenu.classList.toggle('mobile-expanded');
-            toggleBtn.classList.toggle('expanded');
-          });
-        });
-      }
-      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
-      else { initMobileSubmenuToggles(); }
-      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
-      // Re-initialize when mobile menu becomes visible (MutationObserver)
-      var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'attributes') {
-            var target = mutation.target;
-            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
-              setTimeout(initMobileSubmenuToggles, 100);
-            }
-          }
-        });
-      });
-      setTimeout(function() {
-        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
-          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
-        });
-      }, 500);
-    })();
-    </script>
-    <script src="/script.js"></script>
 </body></html>
