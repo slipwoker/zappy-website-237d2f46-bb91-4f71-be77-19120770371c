@@ -1,4 +1,6 @@
-# Business — Generative Engine Optimization Map
+# המרכז לגמילה ממיגרנות ברפואה סינית ודיקור — Generative Engine Optimization Map
+
+> A רפואה משלימה business.
 
 ---
 
@@ -43,12 +45,42 @@ Information about WCAG compliance and accessibility features.
 
 ---
 
-# Business Context (for LLM understanding)
+## How to Contact Us
 
-## About Business
+- Email: ajreri@gmail.com
+- Phone: 0544339627
+- Phone (tel): tel:0544339627
+- Address: תל חי 40, כפר סבא, ישראל
+
+### Contact form
+- URL: https://www.no-migrena.co.il/contact
+- Endpoint: https://www.no-migrena.co.il/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text, required)
+  - `email` (email, required)
+  - `phone` (tel, required)
+  - `subject` (select)
+  - `message` (textarea)
+
 ---
 
-# Additional Resources
+# Business Context (for LLM understanding)
 
-- **Sitemap**: https://www.no-migrena.co.il/sitemap.xml
-- **Robots.txt**: https://www.no-migrena.co.il/robots.txt
+## About המרכז לגמילה ממיגרנות ברפואה סינית ודיקור
+המרכז לגמילה ממיגרנות ברפואה סינית ודיקור is a business in the רפואה משלימה industry.
+
+## Target Audience
+אנשים הסובלים ממיגרנות
+
+## Industry
+רפואה משלימה
+
+---
+
+# Machine-readable feeds
+
+- Sitemap (XML): https://www.no-migrena.co.il/sitemap.xml
+- Robots: https://www.no-migrena.co.il/robots.txt
+- Flattened page text (for LLMs): https://www.no-migrena.co.il/llms-full.txt
