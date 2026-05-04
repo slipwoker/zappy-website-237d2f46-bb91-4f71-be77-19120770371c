@@ -2311,9 +2311,9 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
   --cc-modal-bg: #ffffff;
   --cc-primary-color: #1f2937;
   --cc-secondary-color: #4b5563;
-  --cc-btn-primary-bg: #6B9B7C;
+  --cc-btn-primary-bg: #6b9b7c;
   --cc-btn-primary-color: #ffffff;
-  --cc-btn-primary-border: #6B9B7C;
+  --cc-btn-primary-border: #6b9b7c;
   --cc-btn-primary-hover-bg: #528263;
   --cc-btn-primary-hover-border: #528263;
   --cc-btn-primary-hover-color: #ffffff;
@@ -2329,7 +2329,7 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
   --cc-btn-secondary-hover-bg: #e5e7eb;
   --cc-btn-secondary-hover-color: #111827;
   --cc-btn-secondary-hover-border: #d1d5db;
-  --cc-toggle-on-bg: #6B9B7C;
+  --cc-toggle-on-bg: #6b9b7c;
 }
 
 #cc-main,
@@ -2442,7 +2442,7 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
  * defaults for the preferences modal's two secondary pills). */
 #zappy-cookie-banner .zappy-cookie-banner__button--customize {
   background-color: transparent !important;
-  color: #6B9B7C !important;
+  color: #6b9b7c !important;
   border: none !important;
   padding: 0 8px !important;
   height: 32px !important;
