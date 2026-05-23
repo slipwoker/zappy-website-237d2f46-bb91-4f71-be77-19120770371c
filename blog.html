@@ -326,11 +326,37 @@
     </style>
 
     <style id="zappy-widget-visibility">
-      #mic-access-tool-general-button, .mic-access-tool-general-button,
-      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
-      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
-      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
-        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      html[dir="rtl"] .whatsapp-float { right: 20px !important; left: auto !important; }
+      html[dir="ltr"] .whatsapp-float, html:not([dir]) .whatsapp-float { left: 20px !important; right: auto !important; }
+      html[dir="rtl"] #mic-access-tool-general-button, html[dir="rtl"] .mic-access-tool-general-button,
+      html[dir="rtl"] #mic-init-access-tool .mic-access-tool-general-button,
+      html[dir="rtl"] #mic-init-access-tool #mic-access-tool-general-button,
+      html[dir="rtl"] ._access-icon { left: 20px !important; right: auto !important; }
+      html[dir="ltr"] #mic-access-tool-general-button, html[dir="ltr"] .mic-access-tool-general-button,
+      html[dir="ltr"] #mic-init-access-tool .mic-access-tool-general-button,
+      html[dir="ltr"] #mic-init-access-tool #mic-access-tool-general-button,
+      html[dir="ltr"] ._access-icon,
+      html:not([dir]) #mic-access-tool-general-button, html:not([dir]) .mic-access-tool-general-button,
+      html:not([dir]) #mic-init-access-tool .mic-access-tool-general-button,
+      html:not([dir]) #mic-init-access-tool #mic-access-tool-general-button,
+      html:not([dir]) ._access-icon { right: 20px !important; left: auto !important; }
+      @media (max-width: 768px) { .whatsapp-float { display: flex !important; } }
+      @media (min-width: 769px) { .whatsapp-float { display: flex !important; } }
+      @media (max-width: 768px) {
+        #mic-access-tool-general-button, .mic-access-tool-general-button,
+        #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+        ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+        #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+          display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+        }
+      }
+      @media (min-width: 769px) {
+        #mic-access-tool-general-button, .mic-access-tool-general-button,
+        #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+        ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+        #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+          display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+        }
       }
     </style>
 </head>
@@ -1006,7 +1032,207 @@
   </div>
 </section>
 
-</main>
+<section class="blog-migraine-causes" dir="rtl" lang="he" aria-label="מאמר בלוג: שלוש הסיבות העיקריות להתקפי מיגרנה">
+
+  <!-- Article Header -->
+  <div class="blog-migraine-causes__container">
+    <header class="blog-migraine-causes__header">
+      <div class="blog-migraine-causes__meta">
+        <span class="blog-migraine-causes__category">רפואה סינית ומיגרנות</span>
+        <span class="blog-migraine-causes__separator" aria-hidden="true">•</span>
+        <time class="blog-migraine-causes__date" datetime="2024-01-15">15 בינואר 2024</time>
+        <span class="blog-migraine-causes__separator" aria-hidden="true">•</span>
+        <span class="blog-migraine-causes__read-time">זמן קריאה: 5 דקות</span>
+      </div>
+
+      <h1 class="blog-migraine-causes__title">שלוש הסיבות העיקריות להתקפי מיגרנה</h1>
+      <p class="blog-migraine-causes__subtitle">
+        הרפואה הסינית מזהה קשרים עמוקים בין אורח החיים לבין הופעת התקפי מיגרנה. הבנת השורשים מאפשרת טיפול אמיתי — לא רק הקלה זמנית
+      </p>
+
+      <!-- Hero Image -->
+      <div class="blog-migraine-causes__hero-img-wrap">
+        <img class="blog-migraine-causes__hero-img" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="אישה מחזיקה ראשה בכאב מיגרנה, רקע רגוע בטבע ירוק" data-placeholder="blog-hero-migraine" data-context="Serene woman with eyes closed, holding her temples gently, surrounded by soft green nature and calming light, representing migraine relief through Chinese medicine acupuncture">
+      </div>
+    </header>
+
+    <!-- Intro Paragraph -->
+    <div class="blog-migraine-causes__intro">
+      <p>
+        מיגרנה אינה רק כאב ראש — היא ביטוי של חוסר איזון עמוק בגוף. על פי הרפואה הסינית המסורתית, התקפי מיגרנה נובעים מהפרעה בזרימת האנרגיה (צ'י) ובזרימת הדם בגוף. המחקר המודרני מאשר רבים מהגורמים שהרפואה הסינית זיהתה לפני אלפי שנים. להלן שלושת הגורמים המרכזיים שאנו פוגשים שוב ושוב בקליניקה.
+      </p>
+    </div>
+
+    <!-- Causes Cards Grid -->
+    <div class="blog-migraine-causes__grid" role="list">
+
+      <!-- Card 1: חוסר שגרה -->
+      <article class="blog-migraine-causes__card" role="listitem" aria-labelledby="cause-title-1">
+        <div class="blog-migraine-causes__card-top">
+          <div class="blog-migraine-causes__icon-wrap" aria-hidden="true">
+            <svg class="blog-migraine-causes__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="3"></circle>
+              <path d="M32 18 L32 32 L42 38" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M20 12 L44 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M24 8 L40 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="blog-migraine-causes__card-number" aria-hidden="true">01</div>
+        </div>
+
+        <div class="blog-migraine-causes__card-img-wrap">
+          <img class="blog-migraine-causes__card-img" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="לוח שנה עם שגרה יומית מבולבלת, שעון, ארוחות לא סדירות" data-placeholder="cause-routine-1" data-context="A chaotic daily schedule illustration: clock showing irregular times, scattered meals, disrupted routine calendar — representing lack of daily routine as migraine trigger">
+        </div>
+
+        <div class="blog-migraine-causes__card-body">
+          <h2 class="blog-migraine-causes__card-title" id="cause-title-1">חוסר שגרה</h2>
+          <p class="blog-migraine-causes__card-desc">
+            הרפואה הסינית מדגישה את חשיבות הקצב הטבעי של הגוף — מה שמכונה "שעון הגוף הפנימי". כאשר אנו אוכלים, ישנים ומתעוררים בשעות לא קבועות, הגוף נכנס למצב של חוסר איזון בזרימת הצ'י, מה שמוביל להתקפי מיגרנה.
+          </p>
+          <div class="blog-migraine-causes__card-detail">
+            <h3 class="blog-migraine-causes__detail-title">מה אומר המחקר המודרני?</h3>
+            <p>
+              מחקרים קליניים מראים כי שינויים בשעות הארוחות, דילוג על ארוחות ושינוי בשגרת השינה הם מהגורמים השכיחים ביותר להתקפי מיגרנה. ירידה ברמות הסוכר בדם כתוצאה מדילוג על ארוחות מפעילה מסלולי כאב במוח.
+            </p>
+            <ul class="blog-migraine-causes__tips-list">
+              <li>אכלו בשעות קבועות מדי יום</li>
+              <li>הימנעו מדילוג על ארוחת בוקר</li>
+              <li>שמרו על שגרת שינה-ערות עקבית</li>
+              <li>הוסיפו פעילות גופנית קלה בשעות קבועות</li>
+            </ul>
+          </div>
+          <div class="blog-migraine-causes__tcm-note">
+            <span class="blog-migraine-causes__tcm-label">נקודת מבט סינית</span>
+            <p>בתורת הרפואה הסינית, חוסר שגרה פוגע בתפקוד הכבד והטחול — האיברים האחראים על ויסות זרימת הדם והאנרגיה. דיקור בנקודות ספציפיות מסייע לאזן ולחזק את מערכות אלו.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: שינה לא טובה -->
+      <article class="blog-migraine-causes__card" role="listitem" aria-labelledby="cause-title-2">
+        <div class="blog-migraine-causes__card-top">
+          <div class="blog-migraine-causes__icon-wrap" aria-hidden="true">
+            <svg class="blog-migraine-causes__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 32 C12 20 20 10 34 10 C22 14 18 22 20 34 C22 44 30 52 44 52 C32 56 12 46 12 32Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path>
+              <path d="M44 20 L46 16 L48 20 L52 22 L48 24 L46 28 L44 24 L40 22 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+              <path d="M38 10 L39 8 L40 10 L42 11 L40 12 L39 14 L38 12 L36 11 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="blog-migraine-causes__card-number" aria-hidden="true">02</div>
+        </div>
+
+        <div class="blog-migraine-causes__card-img-wrap">
+          <img class="blog-migraine-causes__card-img" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="אדם ער בלילה, עיניים פקוחות, שעון מראה שעה מאוחרת, חדר חשוך" data-placeholder="cause-sleep-2" data-context="Person lying awake in dark bedroom at night, eyes open staring at ceiling, alarm clock showing 3am, blue light from phone, representing poor sleep quality and insomnia as migraine trigger">
+        </div>
+
+        <div class="blog-migraine-causes__card-body">
+          <h2 class="blog-migraine-causes__card-title" id="cause-title-2">שינה לא טובה</h2>
+          <p class="blog-migraine-causes__card-desc">
+            שינה היא הזמן שבו הגוף מתחדש ומשקם את עצמו. על פי הרפואה הסינית, בשעות הלילה הכבד מבצע את פעולת הניקוי וההתחדשות של הדם. שינה לא מספקת או שינה מקוטעת פוגעת ישירות ביכולת זו ומגבירה את הסיכון למיגרנה.
+          </p>
+          <div class="blog-migraine-causes__card-detail">
+            <h3 class="blog-migraine-causes__detail-title">הקשר המדעי בין שינה למיגרנה</h3>
+            <p>
+              מחקרים מראים כי הן חוסר שינה והן שינה מרובה מדי יכולים להוות טריגר למיגרנה. במהלך שינה, המוח מנקה חלבונים מזיקים ומאזן מוליכים עצביים כגון סרוטונין — שחוסר בו קשור ישירות להתקפי מיגרנה.
+            </p>
+            <ul class="blog-migraine-causes__tips-list">
+              <li>שאפו ל-7–8 שעות שינה בלילה</li>
+              <li>הימנעו ממסכים שעה לפני השינה</li>
+              <li>שמרו על טמפרטורת חדר נוחה וחשוכה</li>
+              <li>אל תפצו על שינה אבודה בשינה מרובה בסוף שבוע</li>
+            </ul>
+          </div>
+          <div class="blog-migraine-causes__tcm-note">
+            <span class="blog-migraine-causes__tcm-label">נקודת מבט סינית</span>
+            <p>בין השעות 23:00 ל-03:00, מערכת הכבד בשיא פעילותה לפי שעון האיברים הסיני. שינה עמוקה בשעות אלו חיונית לניקוי הדם ומניעת "עליית אש הכבד" — מצב שמוביל להתקפי מיגרנה עזים.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: סטרס -->
+      <article class="blog-migraine-causes__card" role="listitem" aria-labelledby="cause-title-3">
+        <div class="blog-migraine-causes__card-top">
+          <div class="blog-migraine-causes__icon-wrap" aria-hidden="true">
+            <svg class="blog-migraine-causes__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M32 8 C32 8 20 18 20 30 C20 38 26 44 32 44 C38 44 44 38 44 30 C44 18 32 8 32 8Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"></path>
+              <path d="M26 30 C26 26 29 24 32 24 C35 24 38 26 38 30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M32 44 L32 52" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+              <path d="M26 50 L38 50" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+              <path d="M14 22 L10 18 M18 14 L16 10 M22 10 L22 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M50 22 L54 18 M46 14 L48 10 M42 10 L42 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="blog-migraine-causes__card-number" aria-hidden="true">03</div>
+        </div>
+
+        <div class="blog-migraine-causes__card-img-wrap">
+          <img class="blog-migraine-causes__card-img" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27 text-anchor=%27middle%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="אדם בלחץ נפשי, ידיים על הראש, סביבת עבודה עמוסה" data-placeholder="cause-stress-3" data-context="Person under mental stress with hands on head, overwhelmed by work, tense shoulders, papers scattered on desk, representing stress and emotional tension as major migraine trigger in Chinese medicine">
+        </div>
+
+        <div class="blog-migraine-causes__card-body">
+          <h2 class="blog-migraine-causes__card-title" id="cause-title-3">סטרס ולחץ נפשי</h2>
+          <p class="blog-migraine-causes__card-desc">
+            סטרס הוא אחד הטריגרים המוכרים ביותר למיגרנה. ברפואה הסינית, לחץ נפשי ממושך גורם לחסימה בזרימת הצ'י של הכבד — מה שמכונה "קיפאון צ'י של הכבד". כאשר האנרגיה חסומה, היא עולה כלפי מעלה ויוצרת לחץ וכאב בראש.
+          </p>
+          <div class="blog-migraine-causes__card-detail">
+            <h3 class="blog-migraine-causes__detail-title">הביולוגיה של סטרס ומיגרנה</h3>
+            <p>
+              בעת סטרס, הגוף משחרר הורמוני לחץ כגון קורטיזול ואדרנלין, הגורמים לכיווץ ולהרחבה של כלי הדם במוח — מנגנון ידוע של הפעלת מיגרנה. יתר על כן, מתח שרירי בצוואר ובכתפיים מחמיר את הכאב.
+            </p>
+            <ul class="blog-migraine-causes__tips-list">
+              <li>תרגלו נשימות עמוקות ומדיטציה יומית</li>
+              <li>שלבו הליכה קלה בטבע</li>
+              <li>זהו את מקורות הלחץ בחיים ופעלו להפחתתם</li>
+              <li>טיפולי דיקור מסייעים לשחרור מתח עצבי ושרירי</li>
+            </ul>
+          </div>
+          <div class="blog-migraine-causes__tcm-note">
+            <span class="blog-migraine-causes__tcm-label">נקודת מבט סינית</span>
+            <p>הרגשות בתורה הסינית קשורים ישירות לאיברים פנימיים: כעס ותסכול פוגעים בכבד, דאגה פוגעת בטחול. דיקור בנקודות כגון LV3 ו-GB20 ידוע ביעילותו בשחרור קיפאון הכבד והקלה מהירה על כאבי ראש ממיגרנה.</p>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /grid -->
+
+    <!-- Conclusion Section -->
+    <footer class="blog-migraine-causes__conclusion">
+      <div class="blog-migraine-causes__conclusion-inner">
+        <div class="blog-migraine-causes__conclusion-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2.5"></circle>
+            <path d="M16 24 L21 29 L32 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="blog-migraine-causes__conclusion-text">
+          <h2 class="blog-migraine-causes__conclusion-title">הדרך לגמילה אמיתית ממיגרנות</h2>
+          <p>
+            הבנת הגורמים לתקפי מיגרנה היא הצעד הראשון לקראת ריפוי אמיתי. הרפואה הסינית ודיקור מציעים גישה הוליסטית המטפלת בשורש הבעיה — לא רק בסימפטומים. אם אתם סובלים ממיגרנות חוזרות, אנו מזמינים אתכם לפגישת ייעוץ ראשונה במרכז שלנו.
+          </p>
+          <a class="blog-migraine-causes__cta-btn" href="#contact" aria-label="קביעת פגישת ייעוץ ראשונה לטיפול במיגרנות">קביעת פגישת ייעוץ ראשונה ←</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Author / Tags -->
+    <div class="blog-migraine-causes__article-footer">
+      <div class="blog-migraine-causes__tags" role="list" aria-label="תגיות המאמר">
+        <span class="blog-migraine-causes__tag" role="listitem">מיגרנה</span>
+        <span class="blog-migraine-causes__tag" role="listitem">דיקור</span>
+        <span class="blog-migraine-causes__tag" role="listitem">רפואה סינית</span>
+        <span class="blog-migraine-causes__tag" role="listitem">שינה</span>
+        <span class="blog-migraine-causes__tag" role="listitem">סטרס</span>
+        <span class="blog-migraine-causes__tag" role="listitem">שגרה בריאה</span>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</section>
+
+
+
+</main>  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
     <script src="/script.js"></script>
 
     <script id="zappy-mobile-submenu-script">
