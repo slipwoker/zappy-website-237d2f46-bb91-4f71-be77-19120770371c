@@ -153,26 +153,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -274,6 +279,7 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "237d2f46-bb91-4f71-be77-19120770371c"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -1233,10 +1239,259 @@
   </div><!-- /container -->
 </section>
 
+<section class="blog-article-section" dir="rtl">
+  <article class="blog-container" aria-labelledby="blog-title">
+    
+    <!-- תמונת כותרת -->
+    <div class="hero-image-wrapper">
+      <img data-placeholder="blog-hero-1" data-context="שולחן עץ טבעי עם קערת ירקות עליים ירוקים טריים, ג'ינג'ר וכורכום טריים חתוכים, אגוזים וזרעים מפוזרים, כוס תה צמחים מהביל, אור טבעי רך, אווירה רגועה וטבעית, רפואה טבעית" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%271200%27 height=%27600%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="מזונות אנטי-דלקתיים טבעיים - ירקות עליים, ג'ינג'ר, כורכום, אגוזים וזרעים" class="hero-image">
+    </div>
+
+    <!-- כותרת ראשית ותת-כותרת -->
+    <header class="blog-header">
+      <h1 id="blog-title" class="blog-title">תזונה אנטי-דלקתית: המפתח להפחתת מיגרנות</h1>
+      <p class="blog-subtitle">הקשר בין דלקת כרונית בגוף להתקפי מיגרנה — וכיצד תזונה נכונה יכולה לשנות את חייכם</p>
+      <div class="blog-meta">
+        <span class="blog-date">עודכן לאחרונה: 2024</span>
+        <span class="blog-tags">
+          <span class="tag">תזונה</span>
+          <span class="tag">מיגרנה</span>
+          <span class="tag">דיקור</span>
+          <span class="tag">רפואה סינית</span>
+          <span class="tag">אנטי-דלקתי</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- מבוא -->
+    <section class="blog-intro">
+      <p>הגוף שלנו הוא מערכת מורכבת שבה כל חלק משפיע על האחר. מחקרים עדכניים מראים כי דלקת כרונית בגוף היא אחד הגורמים המרכזיים להתפתחות התקפי מיגרנה. כאשר מערכת החיסון נמצאת במצב דלקתי מתמשך, היא משפיעה ישירות על מערכת העצבים, מגבירה רגישות לכאב ומעוררת התקפים. החדשות הטובות: תזונה אנטי-דלקתית יכולה להיות כלי רב-עוצמה בהפחתת התדירות והעוצמה של המיגרנות.</p>
+    </section>
+
+    <!-- קלפים - מזונות מומלצים -->
+    <section class="food-cards-section" aria-labelledby="recommended-foods-title">
+      <h2 id="recommended-foods-title" class="section-title">מזונות מומלצים להפחתת דלקת</h2>
+      <div class="food-cards-grid">
+        
+        <div class="food-card">
+          <div class="food-card-image">
+            <img data-placeholder="blog-card-1" data-context="קערת ירקות עליים ירוקים טריים - תרד, קייל, מנגולד, עלי רוקט, מוארים באור טבעי רך, צילום תקריב" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="ירקות עליים ירוקים טריים" class="card-image">
+          </div>
+          <div class="food-card-content">
+            <h3 class="food-card-title">ירקות עליים ירוקים</h3>
+            <p class="food-card-text">תרד, קייל, מנגולד ועלי רוקט עשירים בנוגדי חמצון, ויטמינים ומינרלים חיוניים. הם מסייעים בהפחתת דלקת מערכתית, תומכים בתפקוד מערכת העצבים ומספקים מגנזיום — מינרל חיוני למניעת מיגרנות.</p>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-card-image">
+            <img data-placeholder="blog-card-2" data-context="שורש ג'ינג'ר טרי חתוך ושורש כורכום טרי על קרש חיתוך עץ, אבקת כורכום מפוזרת, אווירה חמה וטבעית" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="ג'ינג'ר וכורכום טריים" class="card-image">
+          </div>
+          <div class="food-card-content">
+            <h3 class="food-card-title">ג'ינג'ר וכורכום</h3>
+            <p class="food-card-text">שני שורשי-על אנטי-דלקתיים. הג'ינג'ר מכיל ג'ינג'רולים המפחיתים כאב ודלקת, והכורכום מכיל כורכומין — נוגד דלקת עוצמתי. שילובם בתזונה היומית יכול להפחית משמעותית את תדירות ההתקפים.</p>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-card-image">
+            <img data-placeholder="blog-card-3" data-context="פילה סלמון טרי על צלחת לבנה, דגים שומניים, שמן זית ליד, לימון טרי, צילום נקי ומקצועי" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="דגי אומגה 3 - סלמון טרי" class="card-image">
+          </div>
+          <div class="food-card-content">
+            <h3 class="food-card-title">אומגה 3 מדגים</h3>
+            <p class="food-card-text">דגים שומניים כמו סלמון, מקרל וסרדינים עשירים בחומצות שומן אומגה 3, הידועות ביכולתן להפחית דלקת מערכתית. צריכה קבועה תומכת בבריאות כלי הדם במוח ומפחיתה את הסיכון להתקפי מיגרנה.</p>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-card-image">
+            <img data-placeholder="blog-card-4" data-context="מבחר אגוזים וזרעים - שקדים, אגוזי מלך, זרעי צ'יה, זרעי פשתן, גרעיני דלעת, מפוזרים על משטח עץ, צילום טבעי" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="אגוזים וזרעים בריאים" class="card-image">
+          </div>
+          <div class="food-card-content">
+            <h3 class="food-card-title">אגוזים וזרעים</h3>
+            <p class="food-card-text">שקדים, אגוזי מלך, זרעי צ'יה ופשתן הם מקור מצוין למגנזיום, ויטמין E ושומנים בריאים. הם מסייעים בייצוב רמות הסוכר בדם, מפחיתים דלקת ומספקים אנרגיה יציבה לאורך היום.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- מזונות שיש להימנע מהם -->
+    <section class="avoid-foods-section" aria-labelledby="avoid-foods-title">
+      <h2 id="avoid-foods-title" class="section-title avoid-title">מזונות שכדאי להימנע מהם</h2>
+      <div class="avoid-list">
+        <div class="avoid-item">
+          <span class="avoid-icon" aria-hidden="true">⚠️</span>
+          <div class="avoid-content">
+            <h3 class="avoid-item-title">מזון מעובד</h3>
+            <p>מזון תעשייתי מכיל חומרים משמרים, צבעי מאכל ותוספים כימיים המגבירים דלקת. העדיפו מזון טרי וטבעי.</p>
+          </div>
+        </div>
+        <div class="avoid-item">
+          <span class="avoid-icon" aria-hidden="true">⚠️</span>
+          <div class="avoid-content">
+            <h3 class="avoid-item-title">סוכר ופחמימות פשוטות</h3>
+            <p>צריכת סוכר גבוהה גורמת לתנודות חדות ברמות הסוכר בדם, מעוררת דלקת ומגבירה את הסיכון להתקפים.</p>
+          </div>
+        </div>
+        <div class="avoid-item">
+          <span class="avoid-icon" aria-hidden="true">⚠️</span>
+          <div class="avoid-content">
+            <h3 class="avoid-item-title">קפאין בכמות גדולה</h3>
+            <p>בעוד שכמות קטנה עשויה להקל, צריכה מוגזמת של קפאין עלולה לגרום להתייבשות, הפרעות שינה והתקפי מיגרנה.</p>
+          </div>
+        </div>
+        <div class="avoid-item">
+          <span class="avoid-icon" aria-hidden="true">⚠️</span>
+          <div class="avoid-content">
+            <h3 class="avoid-item-title">אלכוהול</h3>
+            <p>אלכוהול, במיוחד יין אדום, הוא טריגר ידוע למיגרנות. הוא גורם להתייבשות, מרחיב כלי דם ומעורר דלקת.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- טיפים מעשיים -->
+    <section class="tips-section" aria-labelledby="tips-title">
+      <h2 id="tips-title" class="section-title">טיפים מעשיים לשילוב תזונה אנטי-דלקתית</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <span class="tip-number">1</span>
+          <p>התחילו את הבוקר עם שייק ירוק: תרד, בננה, ג'ינג'ר טרי ומעט מים או חלב שקדים.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-number">2</span>
+          <p>החליפו שמנים מזוקקים בשמן זית כתית מעולה, העשיר בנוגדי חמצון.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-number">3</span>
+          <p>הקפידו על שתיית מים מספקת — התייבשות היא טריגר מרכזי למיגרנות.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-number">4</span>
+          <p>תבלו בנדיבות בכורכום, ג'ינג'ר, קינמון ופלפל שחור (המגביר ספיגת כורכומין).</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-number">5</span>
+          <p>אכלו ארוחות קטנות ומסודרות לאורך היום לשמירה על רמות סוכר יציבות.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-number">6</span>
+          <p>שלבו דגים שומניים לפחות פעמיים בשבוע בתפריט הקבוע שלכם.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- נקודת מבט מהרפואה הסינית -->
+    <section class="tcm-section" aria-labelledby="tcm-title">
+      <h2 id="tcm-title" class="section-title">נקודת מבט מהרפואה הסינית</h2>
+      <div class="tcm-content">
+        <p>ברפואה הסינית, מיגרנות נתפסות כביטוי לחוסר איזון אנרגטי בגוף, הקשור לעיתים קרובות לעודף חום, סטגנציה של צ'י (אנרגיית החיים) בכבד, או חולשה של מערכת הכליות. תזונה אנטי-דלקתית משתלבת באופן מושלם עם עקרונות הרפואה הסינית:</p>
+        <ul class="tcm-list">
+          <li><strong>ירקות עליים ירוקים</strong> — מזינים את הכבד, מקררים ומנקים את הדם</li>
+          <li><strong>ג'ינג'ר וכורכום</strong> — מניעים צ'י תקוע, מחממים ומפזרים סטגנציה</li>
+          <li><strong>דגים שומניים</strong> — מזינים את תמצית הכליות (ג'ינג) ותומכים במערכת העצבים</li>
+          <li><strong>אגוזים וזרעים</strong> — מחזקים את הדם ומזינים את המוח</li>
+        </ul>
+        <p>הטיפול במרכז שלנו משלב דיקור סיני עם הנחיות תזונתיות מותאמות אישית, כדי לטפל בשורש הבעיה ולא רק בסימפטומים.</p>
+      </div>
+    </section>
+
+    <!-- קריאה לפעולה -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <div class="cta-card">
+        <h2 id="cta-title" class="cta-title">מוכנים לשנות את חייכם?</h2>
+        <p class="cta-text">במרכז לגמילה ממיגרנות ברפואה סינית ודיקור, אנו מציעים תוכנית טיפול מקיפה המותאמת אישית לצרכים שלכם, המשלבת דיקור, תזונה אנטי-דלקתית ואיזון אנרגטי.</p>
+        <a href="#" class="cta-button" role="button" aria-label="קבעו ייעוץ טלפוני ללא עלות">קבעו ייעוץ טלפוני ללא עלות</a>
+        <p class="cta-phone">או חייגו: <a href="tel:+972500000000" class="cta-phone-link">050-000-0000</a></p>
+      </div>
+    </section>
+
+  </article>
+</section>
 
 
-</main>  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
+
+
+</main><a href="https://wa.me/972544339627" target="_blank" class="whatsapp-float" aria-label="WhatsApp" rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+<footer class="blog-migraine-causes__conclusion">
+      <div class="blog-migraine-causes__conclusion-inner">
+        <div class="blog-migraine-causes__conclusion-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2.5"></circle>
+            <path d="M16 24 L21 29 L32 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="blog-migraine-causes__conclusion-text">
+          <h2 class="blog-migraine-causes__conclusion-title">הדרך לגמילה אמיתית ממיגרנות</h2>
+          <p>
+            הבנת הגורמים לתקפי מיגרנה היא הצעד הראשון לקראת ריפוי אמיתי. הרפואה הסינית ודיקור מציעים גישה הוליסטית המטפלת בשורש הבעיה — לא רק בסימפטומים. אם אתם סובלים ממיגרנות חוזרות, אנו מזמינים אתכם לפגישת ייעוץ ראשונה במרכז שלנו.
+          </p>
+          <a class="blog-migraine-causes__cta-btn" href="#contact" aria-label="קביעת פגישת ייעוץ ראשונה לטיפול במיגרנות">קביעת פגישת ייעוץ ראשונה ←</a>
+        </div>
+      </div>
+    </footer>
+<script>
+(function() {
+  var websiteId = '237d2f46-bb91-4f71-be77-19120770371c';
+  
+  // Don't show header in preview mode
+  var currentUrl = window.location.href;
+  var isPreview = currentUrl.includes('/preview/') || 
+                  currentUrl.includes('/preview-fullscreen/') || 
+                  currentUrl.includes('localhost:5001') ||
+                  currentUrl.includes('localhost:3000');
+  
+  if (isPreview) {
+    return; // Exit early in preview mode
+  }
+  
+  fetch('https://api.zappy5.com/api/website/' + websiteId + '/tier')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      if (data.showAttribution) {
+        var header = document.getElementById('zappy-attribution-header');
+        if (header) {
+          // Use dynamic announcement content if available
+          if (data.announcement && data.announcement.html) {
+            header.innerHTML = data.announcement.html;
+          }
+          // Apply fixed positioning styles inline (works for existing sites too)
+          header.style.cssText = 'position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 99999 !important; display: flex !important; justify-content: center !important; align-items: center !important; text-align: center !important; box-sizing: border-box !important;';
+          // Fix child elements that might have position: fixed from old CSS
+          var children = header.querySelectorAll('*');
+          for (var i = 0; i < children.length; i++) {
+            children[i].style.position = 'static';
+          }
+          // Get header height
+          var headerHeight = header.offsetHeight;
+          // Find and fix navbar to be fixed as well (prevents gap at top of page)
+          var navSelectors = ['nav', '.navbar', '.nav'];
+          var navbar = null;
+          for (var j = 0; j < navSelectors.length; j++) {
+            navbar = document.querySelector(navSelectors[j]);
+            if (navbar && navbar.id !== 'zappy-attribution-header') break;
+            navbar = null;
+          }
+          if (navbar) {
+            var navbarHeight = navbar.offsetHeight;
+            navbar.style.cssText += '; position: fixed !important; top: ' + headerHeight + 'px !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 99998 !important;';
+            document.body.style.paddingTop = (headerHeight + navbarHeight) + 'px';
+          } else {
+            document.body.style.paddingTop = headerHeight + 'px';
+          }
+        }
+      }
+    })
+    .catch(function(error) {
+      console.error('Failed to check tier:', error);
+    });
+})();
+</script>
+<div data-integration="accessibility:toolbar"></div>
     <script src="/script.js"></script>
 
     <script id="zappy-mobile-submenu-script">

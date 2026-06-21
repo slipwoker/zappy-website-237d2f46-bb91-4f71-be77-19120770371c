@@ -153,26 +153,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -279,6 +284,7 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "237d2f46-bb91-4f71-be77-19120770371c"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -449,7 +455,7 @@
   <section class="pricing-section" id="zappy-section-3">
     <div class="container">
       <h2>חבילות הטיפול שלי</h2>
-      <div class="pricing-grid zappy-preserve-css-grid" data-original-item-width="327" data-original-gap="32px" style="--zappy-grid-cols: 327.333px 327.333px 327.333px; grid-template-columns: 327.333px 327.333px 327.333px;" id="zappy-auto-grid-1770323443066-fhrnv9" data-zappy-auto-grid="true" data-zappy-explicit-columns="true">
+      <div class="pricing-grid zappy-preserve-css-grid" data-original-item-width="327" data-original-gap="32px" style="--zappy-grid-cols: repeat(3, minmax(0, 1fr)); grid-template-columns: repeat(3, minmax(0, 1fr));" id="zappy-auto-grid-1770323443066-fhrnv9" data-zappy-auto-grid="true" data-zappy-explicit-columns="true">
         <div class="pricing-card" data-grid-item-index="0">
           <h3>חבילת התנסות</h3>
           <div class="pricing-features">

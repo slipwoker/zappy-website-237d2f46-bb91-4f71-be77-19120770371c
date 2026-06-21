@@ -153,26 +153,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -377,6 +382,7 @@ img[data-no-hero-position] { position: static !important; }
 
 </style>
     <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "237d2f46-bb91-4f71-be77-19120770371c"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -500,7 +506,7 @@ img[data-no-hero-position] { position: static !important; }
   <!-- Hero Section -->
   <section class="section contact-content-section" id="contact-content" style="background-color: #d0e0d0 !important; padding: 60px 0;" data-zappy-section="true">
     <div class="container">
-      <div class="grid zappy-preserve-css-grid" style="--zappy-grid-cols: 550.5px 550.5px 0px; display: grid; grid-template-columns: 550.5px 550.5px 0px; gap: 40px;" id="zappy-auto-grid-1773761693237-r0c0yi" data-zappy-auto-grid="true" data-original-item-width="555" data-original-gap="32px" data-zappy-explicit-columns="true"><div class="embed-wrapper" style="border-radius: 12px; box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 20px; min-height: 600px; background-color: rgb(255, 255, 255) !important;">
+      <div class="grid zappy-preserve-css-grid" style="display: grid; --zappy-grid-cols: repeat(2, minmax(0, 1fr)); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px;" id="zappy-auto-grid-1773761693237-r0c0yi" data-zappy-auto-grid="true" data-original-item-width="555" data-original-gap="32px" data-zappy-explicit-columns="true"><div class="embed-wrapper" style="border-radius: 12px; box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 20px; min-height: 600px; background-color: rgb(255, 255, 255) !important;">
           <div style="padding: 20px; background-color: #204030 !important; text-align: center;">
             <h2 style="margin: 0px; font-size: 1.3rem; color: rgb(255, 255, 255) !important;" class="zappy-editable">תיאום תור לשיחת ייעוץ טלפוני ללא התחייבות</h2>
           </div>
