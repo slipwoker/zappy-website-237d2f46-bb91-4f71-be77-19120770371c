@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
@@ -215,9 +213,378 @@
 })();
 </script>
 <!-- End Zappy Analytics -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://www.no-migrena.co.il#organization","name":"המרכז לגמילה ממיגרנות ברפואה סינית ודיקור","url":"https://www.no-migrena.co.il","address":{"@type":"PostalAddress","streetAddress":"תל חי 40, כפר סבא, ישראל"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"ajreri@gmail.com","telephone":"0544339627"}]},{"@type":"WebSite","@id":"https://www.no-migrena.co.il#website","url":"https://www.no-migrena.co.il","name":"המרכז לגמילה ממיגרנות ברפואה סינית ודיקור","publisher":{"@id":"https://www.no-migrena.co.il#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.no-migrena.co.il"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.no-migrena.co.il/blog"}]}]}</script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Zappy Marketing Events -->
+<script>
+(function() {
+  'use strict';
+  if (window.zappyFireMarketingEvent) return;
 
+  var ECOM_MODE = "";
+  var IS_CATALOG = false;
+  var IS_FULL = false;
+
+  var ECOM_ALIAS = {
+    begin_checkout: 'checkout_started',
+    purchase: 'checkout_complete',
+    add_to_cart: 'add_to_cart',
+    view_product: 'view_product'
+  };
+
+  function pagePath() {
+    try {
+      if (window.ZAPPY_CONFIG && window.ZAPPY_CONFIG.currentPagePath) {
+        return window.ZAPPY_CONFIG.currentPagePath;
+      }
+    } catch (e) {}
+    try { return window.location.pathname || '/'; } catch (e2) { return '/'; }
+  }
+
+  function normalizeItems(meta) {
+    meta = meta || {};
+    var raw = meta.items || meta.cartItems || meta.cart_items || meta.lineItems || [];
+    if (!Array.isArray(raw)) raw = [];
+    var out = [];
+    for (var i = 0; i < raw.length; i++) {
+      var item = raw[i];
+      if (!item || typeof item !== 'object') continue;
+      var id = String(item.item_id || item.productId || item.product_id || item.id || '').trim();
+      var name = String(item.item_name || item.productName || item.product_name || item.name || '').trim();
+      var price = parseFloat(item.price != null ? item.price : (item.unitPrice != null ? item.unitPrice : 0)) || 0;
+      var quantity = Math.max(1, parseInt(item.quantity != null ? item.quantity : (item.qty != null ? item.qty : 1), 10) || 1);
+      if (!id && !name) continue;
+      out.push({ item_id: id || name, item_name: name || id, price: price, quantity: quantity });
+    }
+    return out;
+  }
+
+  function buildGa4Params(eventId, meta) {
+    meta = meta || {};
+    var items = normalizeItems(meta);
+    var value = parseFloat(meta.value != null ? meta.value : (meta.total != null ? meta.total : 0)) || 0;
+    var currency = String(meta.currency || 'USD').toUpperCase();
+
+    if (eventId === 'checkout_complete') {
+      return {
+        transaction_id: String(meta.transaction_id || meta.orderId || meta.order_id || meta.orderNumber || '') || undefined,
+        value: value,
+        currency: currency,
+        items: items
+      };
+    }
+    if (eventId === 'checkout_started') {
+      return { value: value, currency: currency, items: items };
+    }
+    if (eventId === 'add_to_cart') {
+      var atcItems = items.length ? items : [{
+        item_id: String(meta.productId || meta.product_id || ''),
+        item_name: String(meta.productName || meta.product_name || ''),
+        price: parseFloat(meta.value != null ? meta.value : (meta.price != null ? meta.price : 0)) || 0,
+        quantity: parseInt(meta.quantity != null ? meta.quantity : 1, 10) || 1
+      }].filter(function(x) { return x.item_id || x.item_name; });
+      return {
+        value: value || (atcItems[0] ? atcItems[0].price * atcItems[0].quantity : 0),
+        currency: currency,
+        items: atcItems
+      };
+    }
+    if (eventId === 'view_product') {
+      var vpItems = items.length ? items : [{
+        item_id: String(meta.productId || meta.product_id || ''),
+        item_name: String(meta.productName || meta.product_name || ''),
+        price: parseFloat(meta.price != null ? meta.price : (meta.value != null ? meta.value : 0)) || 0,
+        quantity: 1
+      }].filter(function(x) { return x.item_id || x.item_name; });
+      return {
+        currency: currency,
+        value: value || (vpItems[0] ? vpItems[0].price : 0),
+        items: vpItems
+      };
+    }
+    if (eventId === 'whatsapp_click' || eventId === 'phone_click') {
+      return { method: eventId === 'whatsapp_click' ? 'whatsapp' : 'phone', page_path: meta.pagePath || pagePath() };
+    }
+    if (eventId === 'contact_form_submitted' || eventId === 'product_inquiry') {
+      return { page_path: meta.pagePath || pagePath() };
+    }
+    return meta;
+  }
+
+  function buildMetaParams(eventId, meta) {
+    meta = meta || {};
+    var items = normalizeItems(meta);
+    var value = parseFloat(meta.value != null ? meta.value : (meta.total != null ? meta.total : 0)) || 0;
+    var currency = String(meta.currency || 'USD').toUpperCase();
+    var contentIds = [];
+    var numItems = 0;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].item_id) contentIds.push(items[i].item_id);
+      numItems += items[i].quantity || 1;
+    }
+
+    if (eventId === 'checkout_complete') {
+      return {
+        value: value,
+        currency: currency,
+        content_ids: contentIds.length ? contentIds : undefined,
+        content_type: 'product',
+        num_items: numItems || undefined,
+        order_id: String(meta.order_id || meta.orderId || meta.transaction_id || meta.orderNumber || '') || undefined
+      };
+    }
+    if (eventId === 'checkout_started') {
+      return {
+        value: value,
+        currency: currency,
+        content_ids: contentIds.length ? contentIds : undefined,
+        content_type: 'product',
+        num_items: numItems || parseInt(meta.itemCount != null ? meta.itemCount : 0, 10) || undefined
+      };
+    }
+    if (eventId === 'add_to_cart') {
+      var id = String(meta.productId || meta.product_id || contentIds[0] || '');
+      return {
+        value: value || (items[0] ? items[0].price * items[0].quantity : 0),
+        currency: currency,
+        content_ids: id ? [id] : (contentIds.length ? contentIds : undefined),
+        content_type: 'product',
+        content_name: meta.productName || meta.product_name || (items[0] && items[0].item_name),
+        num_items: parseInt(meta.quantity != null ? meta.quantity : (numItems || 1), 10) || 1
+      };
+    }
+    if (eventId === 'view_product') {
+      var vid = String(meta.productId || meta.product_id || contentIds[0] || '');
+      return {
+        value: value || parseFloat(meta.price != null ? meta.price : 0) || 0,
+        currency: currency,
+        content_ids: vid ? [vid] : (contentIds.length ? contentIds : undefined),
+        content_type: 'product',
+        content_name: meta.productName || meta.product_name || (items[0] && items[0].item_name)
+      };
+    }
+    if (eventId === 'whatsapp_click' || eventId === 'phone_click') {
+      return {
+        content_name: eventId === 'whatsapp_click' ? 'WhatsApp' : 'Phone',
+        content_category: 'contact'
+      };
+    }
+    if (eventId === 'contact_form_submitted' || eventId === 'product_inquiry') {
+      return {
+        content_name: eventId === 'product_inquiry' ? 'Product inquiry' : 'Contact form',
+        content_category: meta.productName || meta.product_name || undefined
+      };
+    }
+    return meta;
+  }
+
+  var PLATFORM = {
+    whatsapp_click: { ga4: 'contact', meta: 'Contact', gtm: 'whatsapp_click', ecom: false },
+    phone_click: { ga4: 'contact', meta: 'Contact', gtm: 'phone_click', ecom: false },
+    contact_form_submitted: { ga4: 'generate_lead', meta: 'Lead', gtm: 'contact_form_submitted', ecom: false },
+    checkout_started: { ga4: 'begin_checkout', meta: 'InitiateCheckout', gtm: 'begin_checkout', ecom: true },
+    checkout_complete: { ga4: 'purchase', meta: 'Purchase', gtm: 'purchase', ecom: true },
+    product_inquiry: { ga4: 'generate_lead', meta: 'Lead', gtm: 'product_inquiry', ecom: false },
+    add_to_cart: { ga4: 'add_to_cart', meta: 'AddToCart', gtm: 'add_to_cart', ecom: true },
+    view_product: { ga4: 'view_item', meta: 'ViewContent', gtm: 'view_item', ecom: true }
+  };
+
+  function purchaseDedupKey(orderId) {
+    return 'zappy_purchase_fired_' + String(orderId || '');
+  }
+
+  function alreadyFiredPurchase(orderId) {
+    if (!orderId) return false;
+    try {
+      return sessionStorage.getItem(purchaseDedupKey(orderId)) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markPurchaseFired(orderId) {
+    if (!orderId) return;
+    try { sessionStorage.setItem(purchaseDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  /**
+   * Fire a marketing event to first-party analytics + GA4/GTM/Meta when present.
+   * @param {string} eventName marketing ID or ecommerce alias
+   * @param {object} [metadata]
+   * @param {{ skipFirstParty?: boolean }} [opts]
+   */
+  window.zappyFireMarketingEvent = function(eventName, metadata, opts) {
+    try {
+      opts = opts || {};
+      metadata = metadata || {};
+      var eventId = ECOM_ALIAS[eventName] || eventName;
+      var plat = PLATFORM[eventId];
+      if (!plat) return;
+
+      if (!metadata.pagePath && !metadata.page_path) {
+        metadata.pagePath = pagePath();
+      }
+
+      if (eventId === 'checkout_complete') {
+        var oid = String(metadata.orderId || metadata.order_id || metadata.transaction_id || '');
+        if (oid && alreadyFiredPurchase(oid)) return;
+        if (oid) markPurchaseFired(oid);
+      }
+
+      // First-party (skip when already tracked via zappyTrackEcomAnalytics path
+      // that opts out, or when caller already recorded under a different name)
+      if (!opts.skipFirstParty) {
+        try {
+          if (window.zappyAnalytics && typeof window.zappyAnalytics.track === 'function') {
+            window.zappyAnalytics.track(eventId, metadata);
+          }
+        } catch (e1) {}
+      }
+
+      // GTM / dataLayer — platform-standard ecommerce event names
+      try {
+        window.dataLayer = window.dataLayer || [];
+        if (plat.ecom) {
+          var ga4ForGtm = buildGa4Params(eventId, metadata);
+          var ecommerce = {};
+          if (ga4ForGtm.transaction_id) ecommerce.transaction_id = ga4ForGtm.transaction_id;
+          if (ga4ForGtm.value != null) ecommerce.value = ga4ForGtm.value;
+          if (ga4ForGtm.currency) ecommerce.currency = ga4ForGtm.currency;
+          if (ga4ForGtm.items) ecommerce.items = ga4ForGtm.items;
+          window.dataLayer.push({ event: plat.gtm, ecommerce: ecommerce });
+          // Secondary Zappy-specific trigger for merchants who want it
+          if (eventId === 'checkout_complete' || eventId === 'checkout_started') {
+            window.dataLayer.push({ event: eventId, ecommerce: ecommerce });
+          }
+        } else {
+          var dl = { event: plat.gtm };
+          for (var k in metadata) {
+            if (Object.prototype.hasOwnProperty.call(metadata, k)) dl[k] = metadata[k];
+          }
+          window.dataLayer.push(dl);
+        }
+      } catch (e2) {}
+
+      // GA4 gtag
+      try {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', plat.ga4, buildGa4Params(eventId, metadata));
+        }
+      } catch (e3) {}
+
+      // Meta Pixel (only when fbq is loaded — consent-gated lazy loader)
+      try {
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', plat.meta, buildMetaParams(eventId, metadata));
+        }
+      } catch (e4) {}
+    } catch (err) {}
+  };
+
+  // ---- Click listeners (capture) ----
+  var recent = Object.create(null);
+  function dedupe(key) {
+    var now = Date.now();
+    if (recent[key] && now - recent[key] < 800) return true;
+    recent[key] = now;
+    return false;
+  }
+
+  function closest(el, selector) {
+    if (!el) return null;
+    if (el.closest) return el.closest(selector);
+    return null;
+  }
+
+  function findAnchor(el) {
+    var node = el;
+    while (node && node !== document) {
+      if (node.tagName === 'A') return node;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function isWhatsAppHref(href) {
+    if (!href) return false;
+    var h = String(href).toLowerCase();
+    return h.indexOf('wa.me/') !== -1 ||
+      h.indexOf('api.whatsapp.com') !== -1 ||
+      h.indexOf('whatsapp.com/send') !== -1 ||
+      h.indexOf('whatsapp:') === 0;
+  }
+
+  document.addEventListener('click', function(e) {
+    try {
+      var target = e.target;
+      if (!target) return;
+
+      // WhatsApp
+      var waFloat = closest(target, '.whatsapp-float, a.whatsapp-float, [data-zappy-whatsapp]');
+      var anchor = findAnchor(target);
+      var href = (anchor && anchor.href) || '';
+      if (waFloat || (anchor && isWhatsAppHref(href))) {
+        if (!dedupe('wa:' + href)) {
+          var waSource = waFloat ? 'float' : 'link';
+          window.zappyFireMarketingEvent('whatsapp_click', {
+            source: waSource,
+            href: href || null,
+            pagePath: pagePath()
+          });
+        }
+        return;
+      }
+
+      // Phone
+      var phoneBtn = closest(target, '.phone-header-btn, .nav-phone-btn, .call-btn, [data-zappy-phone]');
+      var telHref = '';
+      if (anchor && anchor.href && String(anchor.href).toLowerCase().indexOf('tel:') === 0) {
+        telHref = anchor.href;
+      } else if (phoneBtn && phoneBtn.href && String(phoneBtn.href).toLowerCase().indexOf('tel:') === 0) {
+        telHref = phoneBtn.href;
+      }
+      if (phoneBtn || telHref) {
+        var phone = '';
+        if (telHref) {
+          phone = String(telHref).replace(/^tel:/i, '').trim();
+        }
+        if (!dedupe('tel:' + (phone || (phoneBtn && phoneBtn.id) || 'btn'))) {
+          window.zappyFireMarketingEvent('phone_click', {
+            source: phoneBtn ? 'button' : 'link',
+            phone: phone || null,
+            href: telHref || null,
+            pagePath: pagePath()
+          });
+        }
+        return;
+      }
+
+      // Catalog / product inquiry
+      if (IS_CATALOG || IS_FULL) {
+        var inq = closest(target, '.card-inquiry-btn, #zappy-pdp-inquiry-btn, a.inquiry-btn');
+        if (inq) {
+          if (!dedupe('inq:' + (inq.id || inq.className))) {
+            var product = window.currentProduct || null;
+            var productId = (inq.getAttribute && inq.getAttribute('data-product-id')) ||
+              (product && product.id) || null;
+            var productName = (inq.getAttribute && inq.getAttribute('data-product-name')) ||
+              (product && product.name) || null;
+            var channel = 'contact_page';
+            var inqHref = (inq.tagName === 'A' && inq.href) ? inq.href : '';
+            if (inqHref && String(inqHref).toLowerCase().indexOf('mailto:') === 0) channel = 'mailto';
+            window.zappyFireMarketingEvent('product_inquiry', {
+              source: inq.id === 'zappy-pdp-inquiry-btn' ? 'pdp' : 'card',
+              productId: productId,
+              productName: productName,
+              channel: channel,
+              pagePath: pagePath()
+            });
+          }
+        }
+      }
+    } catch (err) {}
+  }, true);
+})();
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://www.no-migrena.co.il#organization","name":"המרכז לגמילה ממיגרנות ברפואה סינית ודיקור","url":"https://www.no-migrena.co.il","address":{"@type":"PostalAddress","streetAddress":"תל חי 40, כפר סבא, ישראל"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"ajreri@gmail.com","telephone":"0544339627"}]},{"@type":"WebSite","@id":"https://www.no-migrena.co.il#website","url":"https://www.no-migrena.co.il","name":"המרכז לגמילה ממיגרנות ברפואה סינית ודיקור","publisher":{"@id":"https://www.no-migrena.co.il#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.no-migrena.co.il"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.no-migrena.co.il/blog"}]}]}</script>
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
@@ -275,9 +642,59 @@
 }</style>
     <!-- Cookie Consent -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    
     <!-- Mickidum Accessibility Toolbar -->
-    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    
+    <style id="zappy-critical-above-fold-css">
+html{box-sizing:border-box;-webkit-text-size-adjust:100%}*,*::before,*::after{box-sizing:inherit}body{margin:0;min-width:320px;overflow-x:clip}img,svg,video{max-width:100%;height:auto}main{display:block}.container{width:min(100% - 32px,1200px);margin-inline:auto}.navbar,nav.navbar,header .navbar,header[role="banner"]{position:relative;z-index:1000;width:100%}.nav-container,.navbar .container{display:flex;align-items:center;justify-content:space-between;min-height:64px}.logo,.logo-link img{display:block;width:35px;height:35px;object-fit:contain}.nav-menu,#navMenu{list-style:none;margin:0;padding:0}.navbar a,.nav-menu a,#navMenu a,.navbar .nav-links a{color:inherit;text-decoration:none}.navbar .sub-menu,.nav-menu .sub-menu,#navMenu .sub-menu{display:none}.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands{display:inline-block;min-width:1em;text-align:center}html:not(#zappy-noop)[data-zappy-site-type="ecommerce"] .phone-header-btn,html:not(#zappy-noop) .navbar:has(.nav-ecommerce-icons)>.phone-header-btn{display:none!important;visibility:hidden!important;width:0!important;height:0!important;pointer-events:none!important}.zappy-preview-empty-store-cta{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}.zappy-catalog-menu{background:var(--surface-color,var(--surface,linear-gradient(135deg,#f8f9fa 0%,#fff 100%)));border-bottom:1px solid var(--border-color,#e5e7eb);padding:0;position:sticky;top:0;z-index:90}.zappy-catalog-menu[dir=rtl],.zappy-catalog-menu.rtl{direction:rtl}.zappy-catalog-menu[dir=ltr],.zappy-catalog-menu.ltr{direction:ltr}.catalog-menu-container{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:10px 24px;overflow:visible}.catalog-menu-categories,.catalog-menu-list{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:0;padding:0;list-style:none}.catalog-menu-item{display:inline-flex;align-items:center;padding:8px 16px;font-size:14px;font-weight:500;color:var(--text-color,var(--text,#374151));text-decoration:none;border-radius:20px;white-space:nowrap}.catalog-menu-all{background:var(--primary-color,var(--primary,#111));color:var(--text-light,#fff)!important}.catalog-menu-parent{position:relative;display:inline-flex;align-items:center}.catalog-menu-trigger{display:inline-flex;align-items:center;gap:6px}.catalog-menu-chevron{flex-shrink:0}.catalog-menu-parent>.sub-menu{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}.hero-section,.index-hero-section,section[class*="hero"]{position:relative;overflow:hidden}.hero-section,.index-hero-section{min-height:560px}section[data-hero-type*="fullscreen"]{min-height:100vh}.hero-bg-wrapper,.hero-bg-image,section[class*="hero"] [class*="hero-bg"]{position:absolute;inset:0;width:100%;height:100%}.hero-bg-wrapper img,.hero-bg-image img,section[class*="hero"] [data-hero-bg],section[class*="hero"] img[data-hero-background="true"]{width:100%!important;height:100%!important;object-fit:cover!important;display:block}.hero-content,section[class*="hero"] .container{position:relative;z-index:2}@media(max-width:768px){:root{--header-height:72px;--total-header-height:72px;--zappy-mobile-menu-top:72px}html[data-zappy-site-type="ecommerce"] body{padding-top:var(--total-header-height,72px)}html[data-zappy-site-type="ecommerce"] body>nav.navbar,html[data-zappy-site-type="ecommerce"] body>.navbar:not(.zappy-catalog-menu){position:fixed!important;top:0;left:0;right:0;z-index:100000;width:100%;margin-bottom:0}.zappy-catalog-menu{position:fixed;top:var(--header-height,72px);left:0;right:0;z-index:99999}.nav-container,.navbar .container{min-height:60px}.nav-menu,#navMenu{max-width:100vw;overflow-x:hidden}.hero-section,.index-hero-section,section[class*="hero"],section[data-hero-type*="fullscreen"]{min-height:100svh}.hero-bg-wrapper,.hero-bg-image,.hero-scrim{min-height:100svh}}
+:root{--nav-bg:#ffffff}.navbar{background-color:#ffffff!important}
+
+/* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
+:root {
+  --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
+}
+body:has(.zappy-announcement-bar) nav.navbar:not(.zappy-catalog-menu),
+body:has(.zappy-announcement-bar) header.navbar,
+body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-search-panel) {
+  top: var(--zappy-announcement-height, 40px) !important;
+}
+
+
+
+/* ZAPPY_CONTENT_ALIGNMENT_FIRST_PAINT_CSS_V1 */
+[data-zappy-content-align] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+[data-zappy-content-align^="top-"] { justify-content: flex-start !important; }
+[data-zappy-content-align^="upper-"],
+[data-zappy-content-align^="center-"],
+[data-zappy-content-align^="lower-"] { justify-content: center !important; }
+[data-zappy-content-align^="bottom-"] { justify-content: flex-end !important; }
+[data-zappy-content-align$="-left"],
+[data-zappy-content-align$="-mid-left"] {
+  align-items: flex-start !important;
+  text-align: start !important;
+}
+[data-zappy-content-align$="-center"] {
+  align-items: center !important;
+  text-align: center !important;
+}
+[data-zappy-content-align$="-right"],
+[data-zappy-content-align$="-mid-right"] {
+  align-items: flex-end !important;
+  text-align: end !important;
+}
+[data-zappy-content-align] [data-zappy-align-target] {
+  margin-left: auto;
+  margin-right: auto;
+}
+[data-zappy-content-align$="-center"] [data-zappy-align-target],
+[data-zappy-content-align$="-center"] [data-zappy-align-target] > * {
+  text-align: center !important;
+}
+
+</style>
     <link rel="stylesheet" href="/styles.css">
     <script>window.ZAPPY_WEBSITE_ID = "237d2f46-bb91-4f71-be77-19120770371c"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
@@ -286,7 +703,7 @@
       /* Base styles for dropdown submenus - parent must be positioned */
       .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
       /* Submenu base - hidden by default */
-      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
       /* CRITICAL: Desktop hover styles to show dropdown */
       .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
       /* Submenu item styling */
@@ -315,7 +732,7 @@
         .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
         .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
         .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
-        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; display: flex !important; align-items: center !important; padding: 12px 16px !important; min-height: 44px !important; line-height: 1.4 !important; font-weight: 600 !important; box-sizing: border-box !important; }
         .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
         .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
         .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
@@ -375,15 +792,15 @@
   <div class="container nav-container">
     <div class="nav-brand">
       <a href="/" class="logo-link">
-        <img src="/assets/business-logo.webp" alt="המרכז לגמילה ממיגרנות ברפואה סינית ודיקור" class="logo">
+        <img src="/assets/business-logo.webp" alt="המרכז לגמילה ממיגרנות ברפואה סינית ודיקור" class="logo" decoding="async" width="35" height="35">
       </a>
     </div>
     
     <button class="mobile-toggle" id="mobileToggle" aria-label="פתח תפריט">
-      <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <svg style="display:block !important" class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
       </svg>
-      <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+      <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none !important">
         <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
       </svg>
     </button>
@@ -405,7 +822,7 @@
     <div class="container">
       <div class="hero-content text-center">
         <h1 class="hero-title">בלוג - מאמרים ועדכונים</h1>
-        <p class="hero-subtitle" ><font color="#000000">כל מה שרציתם לדעת על טיפול במיגרנות ברפואה סינית</font></p>
+        <p class="hero-subtitle"><font color="#000000">כל מה שרציתם לדעת על טיפול במיגרנות ברפואה סינית</font></p>
       </div>
     </div>
   </section>
@@ -855,7 +1272,7 @@
           <p>אחד היתרונות המרכזיים של דיקור סיני הוא שהוא מטפל בשורש הבעיה ולא רק בתסמינים. בעוד שתרופות משככות כאב מספקות הקלה זמנית, דיקור עובד על איזון כל מערכות הגוף - מערכת העיכול, מערכת העצבים, והמערכת ההורמונלית. כך נוצר שיפור ארוך טווח ולא רק הקלה מיידית. בנוסף, הדיקור בטוח לחלוטין, ללא סיכון לתלות או תופעות לוואי חמורות.</p>
         </div>
 
-        <div class="acupuncture-item" data-grid-item-index="3" >
+        <div class="acupuncture-item" data-grid-item-index="3">
           <h3 style="color: rgb(26, 26, 26) !important;">מה לצפות מטיפול דיקור למיגרנות</h3>
           <p>טיפול דיקור למיגרנות כולל בדרך כלל סדרה של פגישות, כאשר כל פגישה נמשכת כ-45-60 דקות. במהלך הטיפול, המטפל מחדיר מחטים דקות מאוד לנקודות ספציפיות בגוף, בהתאם לאבחון האישי של המטפל. רוב המטופלים מדווחים על תחושת רגיעה עמוקה במהלך הטיפול, ושיפור הדרגתי בתדירות ובעוצמת התקפי המיגרנה לאורך זמן.</p>
         </div>
@@ -901,7 +1318,7 @@
         <div class="tip-block zappy-grid-item-no-stretch" data-grid-item-index="3">
           <div class="tip-number">4</div>
           <h3 style="color: rgb(26, 26, 26) !important;" data-grid-item-index="1">טיפ 4: פעילות גופנית סדירה ומתונה</h3>
-          <p data-grid-item-index="2" >פעילות גופנית סדירה משפרת את זרימת הדם, משחררת אנדורפינים, ומסייעת באיזון ההורמונים - כל אלה תורמים למניעת מיגרנות. עם זאת, חשוב להתחיל בהדרגה ולהימנע מפעילות אינטנסיבית מדי שעלולה דווקא לעורר מיגרנה. הרפואה הסינית ממליצה על פעילות מתונה כמו הליכה מהירה, שחייה, או רכיבה על אופניים למשך 30 דקות, 4-5 פעמים בשבוע. הקפידו להתחייב ללוח זמנים קבוע, עדיף פחות פעמים אך בימים ושעות קבועות מאשר יותר פעילות בשמנים משתנים&nbsp;</p>
+          <p data-grid-item-index="2">פעילות גופנית סדירה משפרת את זרימת הדם, משחררת אנדורפינים, ומסייעת באיזון ההורמונים - כל אלה תורמים למניעת מיגרנות. עם זאת, חשוב להתחיל בהדרגה ולהימנע מפעילות אינטנסיבית מדי שעלולה דווקא לעורר מיגרנה. הרפואה הסינית ממליצה על פעילות מתונה כמו הליכה מהירה, שחייה, או רכיבה על אופניים למשך 30 דקות, 4-5 פעמים בשבוע. הקפידו להתחייב ללוח זמנים קבוע, עדיף פחות פעמים אך בימים ושעות קבועות מאשר יותר פעילות בשמנים משתנים&nbsp;</p>
         </div>
       </div>
     </div>
@@ -926,7 +1343,7 @@
     <!-- Main Blog Card -->
     <article class="blog-gl-main-card">
       <div class="blog-gl-main-image-wrap">
-        <img src="/assets/image-1777888552121-1d50d4.webp?v=1777888552121" alt="אור ירוק מרגיע על רקע כהה המסמל הקלה ממיגרנה" class="blog-gl-main-image" data-placeholder="green-light-migraine-hero" data-context="Soft green light glowing in a dark room, peaceful and calming atmosphere, representing migraine relief therapy with green light wavelength" data-element-type="image" data-element-id="img-1777888834097-24p7lyvea" >
+        <img src="/assets/image-1777888552121-1d50d4.webp?v=1777888552121" alt="אור ירוק מרגיע על רקע כהה המסמל הקלה ממיגרנה" class="blog-gl-main-image" data-placeholder="green-light-migraine-hero" data-context="Soft green light glowing in a dark room, peaceful and calming atmosphere, representing migraine relief therapy with green light wavelength" data-element-type="image" data-element-id="img-1777888834097-24p7lyvea" decoding="async">
         <div class="blog-gl-image-badge">מחקר חדש</div>
       </div>
 
@@ -972,7 +1389,7 @@
     <div class="blog-gl-cards-grid zappy-preserve-css-grid" id="zappy-auto-grid-1777888834111-4m07ku" data-zappy-auto-grid="true" data-original-item-width="364" data-original-gap="24px" style="display: grid; --zappy-grid-cols: repeat(3, minmax(0, 1fr)); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch !important;" data-zappy-explicit-columns="true">
       <div class="blog-gl-info-card" data-grid-item-index="0">
         <div class="blog-gl-info-image-wrap">
-          <img src="/assets/image-1777888678280-buakso.webp?v=1777888678280" alt="מנורת אור ירוק טיפולית" class="blog-gl-info-image" data-placeholder="green-light-lamp-therapy" data-context="A therapeutic green LED lamp emitting soft green light in a serene treatment room with minimal decor, clinical yet calming" data-element-type="image" data-element-id="img-1777888834098-jdnjun5jn" >
+          <img src="/assets/image-1777888678280-buakso.webp?v=1777888678280" alt="מנורת אור ירוק טיפולית" class="blog-gl-info-image" data-placeholder="green-light-lamp-therapy" data-context="A therapeutic green LED lamp emitting soft green light in a serene treatment room with minimal decor, clinical yet calming" data-element-type="image" data-element-id="img-1777888834098-jdnjun5jn" loading="lazy" decoding="async" fetchpriority="low">
         </div>
         <div class="blog-gl-info-body">
           <p class="zappy-editable"><span class="blog-gl-info-tag">ציוד וטכנולוגיה</span>
@@ -984,7 +1401,7 @@
 
       <div class="blog-gl-info-card" data-grid-item-index="1">
         <div class="blog-gl-info-image-wrap">
-          <div data-zappy-zoom-wrapper="true" data-element-id="img-1777888834098-e5bt0d0i8" data-element-type="image" data-zappy-zoom-wrapper-width="362px" data-zappy-zoom-wrapper-height="190px" data-zappy-zoom-wrapper-width-mode="px" data-zappy-zoom-wrapper-align="center" style="position: relative !important; overflow: hidden !important; width: 362px !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; height: 190px !important; display: block !important; padding-bottom: 0px !important;" data-zappy-zoom-clip="true" data-zappy-wrapper-margins-applied="true" data-zappy-card-slot-fill="1"><img src="/assets/image-1777888890124-236msr.webp?v=1777888892541" alt="אישה מרגיעה ראש עם אור ירוק ברקע" class="blog-gl-info-image" data-placeholder="woman-relaxing-green-light" data-context="A woman lying down relaxing with eyes closed in a dark room with soft green ambient light glowing around her, peaceful migraine relief scene" data-element-type="image" data-element-id="img-1777888834098-e5bt0d0i8" style="display: block; object-position: 50% 50% !important; margin: 0px !important; left: 0% !important; top: 0% !important; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; object-fit: cover !important;" data-zappy-zoom="1" data-zappy-original-width="362" data-zappy-original-height="190" data-zappy-object-position="50% 50%"></div>
+          <div data-zappy-zoom-wrapper="true" data-element-id="img-1777888834098-e5bt0d0i8" data-element-type="image" data-zappy-zoom-wrapper-width="362px" data-zappy-zoom-wrapper-height="190px" data-zappy-zoom-wrapper-width-mode="px" data-zappy-zoom-wrapper-align="center" style="position: relative !important; overflow: hidden !important; width: 362px !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; height: 190px !important; display: block !important; padding-bottom: 0px !important;" data-zappy-zoom-clip="true" data-zappy-wrapper-margins-applied="true" data-zappy-card-slot-fill="1"><img src="/assets/image-1777888890124-236msr.webp?v=1777888892541" alt="אישה מרגיעה ראש עם אור ירוק ברקע" class="blog-gl-info-image" data-placeholder="woman-relaxing-green-light" data-context="A woman lying down relaxing with eyes closed in a dark room with soft green ambient light glowing around her, peaceful migraine relief scene" data-element-type="image" data-element-id="img-1777888834098-e5bt0d0i8" style="display: block; object-position: 50% 50% !important; margin: 0px !important; left: 0% !important; top: 0% !important; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; object-fit: cover !important;" data-zappy-zoom="1" data-zappy-original-width="362" data-zappy-original-height="190" data-zappy-object-position="50% 50%" loading="lazy" decoding="async" fetchpriority="low"></div>
         </div>
         <div class="blog-gl-info-body">
           <p class="zappy-editable"><span class="blog-gl-info-tag">מדריך שימוש</span>
@@ -996,7 +1413,7 @@
 
       <div class="blog-gl-info-card" data-grid-item-index="2">
         <div class="blog-gl-info-image-wrap">
-          <img src="/assets/image-1777888992609-je2sm8.webp?v=1777888992609" alt="דיקור סיני ואור ירוק בשילוב" class="blog-gl-info-image" data-placeholder="acupuncture-green-light-combination" data-context="Traditional Chinese acupuncture needles placed on a person's head with soft green ambient light in the background, holistic treatment room" data-element-type="image" data-element-id="img-1777888834098-dbjzvs65v" >
+          <img src="/assets/image-1777888992609-je2sm8.webp?v=1777888992609" alt="דיקור סיני ואור ירוק בשילוב" class="blog-gl-info-image" data-placeholder="acupuncture-green-light-combination" data-context="Traditional Chinese acupuncture needles placed on a person's head with soft green ambient light in the background, holistic treatment room" data-element-type="image" data-element-id="img-1777888834098-dbjzvs65v" loading="lazy" decoding="async" fetchpriority="low">
         </div>
         <div class="blog-gl-info-body">
           <p class="zappy-editable"><span class="blog-gl-info-tag">טיפול משולב</span>
@@ -1062,7 +1479,7 @@
 
       <!-- Hero Image -->
       <div class="blog-migraine-causes__hero-img-wrap">
-        <img class="blog-migraine-causes__hero-img" src="/assets/image-blog-hero-migraine-triggers-1779562159887-oite9g.webp" alt="אישה מחזיקה ראשה בכאב מיגרנה, רקע רגוע בטבע ירוק" data-placeholder="blog-hero-migraine" data-context="Serene woman with eyes closed, holding her temples gently, surrounded by soft green nature and calming light, representing migraine relief through Chinese medicine acupuncture">
+        <img class="blog-migraine-causes__hero-img" src="/assets/image-blog-hero-migraine-triggers-1779562159887-oite9g.webp" alt="אישה מחזיקה ראשה בכאב מיגרנה, רקע רגוע בטבע ירוק" data-placeholder="blog-hero-migraine" data-context="Serene woman with eyes closed, holding her temples gently, surrounded by soft green nature and calming light, representing migraine relief through Chinese medicine acupuncture" decoding="async">
       </div>
     </header>
 
@@ -1091,7 +1508,7 @@
         </div>
 
         <div class="blog-migraine-causes__card-img-wrap">
-          <img class="blog-migraine-causes__card-img" src="/assets/image-blog-hero-migraine-triggers-1779562381238-hjys1t.webp?v=1779562381238" alt="לוח שנה עם שגרה יומית מבולבלת, שעון, ארוחות לא סדירות" data-placeholder="cause-routine-1" data-context="A chaotic daily schedule illustration: clock showing irregular times, scattered meals, disrupted routine calendar — representing lack of daily routine as migraine trigger">
+          <img class="blog-migraine-causes__card-img" src="/assets/image-blog-hero-migraine-triggers-1779562381238-hjys1t.webp?v=1779562381238" alt="לוח שנה עם שגרה יומית מבולבלת, שעון, ארוחות לא סדירות" data-placeholder="cause-routine-1" data-context="A chaotic daily schedule illustration: clock showing irregular times, scattered meals, disrupted routine calendar — representing lack of daily routine as migraine trigger" decoding="async">
         </div>
 
         <div class="blog-migraine-causes__card-body">
@@ -1132,7 +1549,7 @@
         </div>
 
         <div class="blog-migraine-causes__card-img-wrap">
-          <img class="blog-migraine-causes__card-img" src="/assets/image-blog-hero-migraine-triggers-1779562545095-sdryxo.webp?v=1779562545095" alt="אדם ער בלילה, עיניים פקוחות, שעון מראה שעה מאוחרת, חדר חשוך" data-placeholder="cause-sleep-2" data-context="Person lying awake in dark bedroom at night, eyes open staring at ceiling, alarm clock showing 3am, blue light from phone, representing poor sleep quality and insomnia as migraine trigger">
+          <img class="blog-migraine-causes__card-img" src="/assets/image-blog-hero-migraine-triggers-1779562545095-sdryxo.webp?v=1779562545095" alt="אדם ער בלילה, עיניים פקוחות, שעון מראה שעה מאוחרת, חדר חשוך" data-placeholder="cause-sleep-2" data-context="Person lying awake in dark bedroom at night, eyes open staring at ceiling, alarm clock showing 3am, blue light from phone, representing poor sleep quality and insomnia as migraine trigger" decoding="async">
         </div>
 
         <div class="blog-migraine-causes__card-body">
@@ -1176,7 +1593,7 @@
         </div>
 
         <div class="blog-migraine-causes__card-img-wrap">
-          <img class="blog-migraine-causes__card-img" src="/assets/image-1779562708031-qlt3nz.webp?v=1779562708031" alt="אדם בלחץ נפשי, ידיים על הראש, סביבת עבודה עמוסה" data-placeholder="cause-stress-3" data-context="Person under mental stress with hands on head, overwhelmed by work, tense shoulders, papers scattered on desk, representing stress and emotional tension as major migraine trigger in Chinese medicine">
+          <img class="blog-migraine-causes__card-img" src="/assets/image-1779562708031-qlt3nz.webp?v=1779562708031" alt="אדם בלחץ נפשי, ידיים על הראש, סביבת עבודה עמוסה" data-placeholder="cause-stress-3" data-context="Person under mental stress with hands on head, overwhelmed by work, tense shoulders, papers scattered on desk, representing stress and emotional tension as major migraine trigger in Chinese medicine" loading="lazy" decoding="async" fetchpriority="low">
         </div>
 
         <div class="blog-migraine-causes__card-body">
@@ -1244,7 +1661,7 @@
     
     <!-- תמונת כותרת -->
     <div class="hero-image-wrapper">
-      <img data-placeholder="blog-hero-1" data-context="שולחן עץ טבעי עם קערת ירקות עליים ירוקים טריים, ג'ינג'ר וכורכום טריים חתוכים, אגוזים וזרעים מפוזרים, כוס תה צמחים מהביל, אור טבעי רך, אווירה רגועה וטבעית, רפואה טבעית" src="/assets/image-1782055561999-u3a6qj.webp?v=1782055561999" alt="מזונות אנטי-דלקתיים טבעיים - ירקות עליים, ג'ינג'ר, כורכום, אגוזים וזרעים" class="hero-image">
+      <img data-placeholder="blog-hero-1" data-context="שולחן עץ טבעי עם קערת ירקות עליים ירוקים טריים, ג'ינג'ר וכורכום טריים חתוכים, אגוזים וזרעים מפוזרים, כוס תה צמחים מהביל, אור טבעי רך, אווירה רגועה וטבעית, רפואה טבעית" src="/assets/image-1782055561999-u3a6qj.webp?v=1782055561999" alt="מזונות אנטי-דלקתיים טבעיים - ירקות עליים, ג'ינג'ר, כורכום, אגוזים וזרעים" class="hero-image" decoding="async">
     </div>
 
     <!-- כותרת ראשית ותת-כותרת -->
@@ -1275,7 +1692,7 @@
         
         <div class="food-card">
           <div class="food-card-image">
-            <img data-placeholder="blog-card-1" data-context="קערת ירקות עליים ירוקים טריים - תרד, קייל, מנגולד, עלי רוקט, מוארים באור טבעי רך, צילום תקריב" src="/assets/image-1782055581773-wa62nw.webp?v=1782055581773" alt="ירקות עליים ירוקים טריים" class="card-image">
+            <img data-placeholder="blog-card-1" data-context="קערת ירקות עליים ירוקים טריים - תרד, קייל, מנגולד, עלי רוקט, מוארים באור טבעי רך, צילום תקריב" src="/assets/image-1782055581773-wa62nw.webp?v=1782055581773" alt="ירקות עליים ירוקים טריים" class="card-image" loading="lazy" decoding="async" fetchpriority="low">
           </div>
           <div class="food-card-content">
             <h3 class="food-card-title">ירקות עליים ירוקים</h3>
@@ -1285,7 +1702,7 @@
 
         <div class="food-card">
           <div class="food-card-image">
-            <img data-placeholder="blog-card-2" data-context="שורש ג'ינג'ר טרי חתוך ושורש כורכום טרי על קרש חיתוך עץ, אבקת כורכום מפוזרת, אווירה חמה וטבעית" src="/assets/image-1782055600149-hwooai.webp?v=1782055600149" alt="ג'ינג'ר וכורכום טריים" class="card-image">
+            <img data-placeholder="blog-card-2" data-context="שורש ג'ינג'ר טרי חתוך ושורש כורכום טרי על קרש חיתוך עץ, אבקת כורכום מפוזרת, אווירה חמה וטבעית" src="/assets/image-1782055600149-hwooai.webp?v=1782055600149" alt="ג'ינג'ר וכורכום טריים" class="card-image" loading="lazy" decoding="async" fetchpriority="low">
           </div>
           <div class="food-card-content">
             <h3 class="food-card-title">ג'ינג'ר וכורכום</h3>
@@ -1295,7 +1712,7 @@
 
         <div class="food-card">
           <div class="food-card-image">
-            <img data-placeholder="blog-card-3" data-context="פילה סלמון טרי על צלחת לבנה, דגים שומניים, שמן זית ליד, לימון טרי, צילום נקי ומקצועי" src="/assets/image-1782055622609-h6wx3l.webp?v=1782055622609" alt="דגי אומגה 3 - סלמון טרי" class="card-image">
+            <img data-placeholder="blog-card-3" data-context="פילה סלמון טרי על צלחת לבנה, דגים שומניים, שמן זית ליד, לימון טרי, צילום נקי ומקצועי" src="/assets/image-1782055622609-h6wx3l.webp?v=1782055622609" alt="דגי אומגה 3 - סלמון טרי" class="card-image" loading="lazy" decoding="async" fetchpriority="low">
           </div>
           <div class="food-card-content">
             <h3 class="food-card-title">אומגה 3 מדגים</h3>
@@ -1305,7 +1722,7 @@
 
         <div class="food-card">
           <div class="food-card-image">
-            <img data-placeholder="blog-card-4" data-context="מבחר אגוזים וזרעים - שקדים, אגוזי מלך, זרעי צ'יה, זרעי פשתן, גרעיני דלעת, מפוזרים על משטח עץ, צילום טבעי" src="/assets/image-1782055642372-3hvjww.webp?v=1782055642372" alt="אגוזים וזרעים בריאים" class="card-image">
+            <img data-placeholder="blog-card-4" data-context="מבחר אגוזים וזרעים - שקדים, אגוזי מלך, זרעי צ'יה, זרעי פשתן, גרעיני דלעת, מפוזרים על משטח עץ, צילום טבעי" src="/assets/image-1782055642372-3hvjww.webp?v=1782055642372" alt="אגוזים וזרעים בריאים" class="card-image" loading="lazy" decoding="async" fetchpriority="low">
           </div>
           <div class="food-card-content">
             <h3 class="food-card-title">אגוזים וזרעים</h3>
@@ -1410,6 +1827,123 @@
   </article>
 </section>
 
+<section class="acupressure-blog" dir="rtl" aria-labelledby="blog-main-heading">
+  <div class="blog-container">
+    <!-- Header -->
+    <header class="blog-header">
+      <span class="blog-label">אקופרסורה טיפולית</span>
+      <h1 id="blog-main-heading" class="blog-title">3 נקודות הלחיצה שישנו לכם את ההתמודדות עם מיגרנות</h1>
+      <p class="blog-subtitle">מדריך מעשי ללחיצה ביתית על נקודות דיקור סיני – להקלה מיידית ומניעה לאורך זמן</p>
+    </header>
+
+    <!-- Introduction -->
+    <div class="blog-intro">
+      <p>אקופרסורה (לחיצה על נקודות דיקור) היא שיטה עתיקה המבוססת על עקרונות הרפואה הסינית, המאפשרת לכל אחד מאיתנו לגרות נקודות מפתח בגוף באופן עצמאי. היתרון הגדול: טיפול נגיש, ללא מחטים, שניתן לבצע בכל מקום ובכל זמן. עבור הסובלים ממיגרנות, שלוש נקודות ספציפיות הוכחו כיעילות במיוחד – הן בהקלה על כאב בזמן התקף, והן בהפחתת התדירות לאורך זמן.</p>
+    </div>
+
+    <!-- Point Cards -->
+    <div class="points-grid">
+      <!-- Card 1: CO4 -->
+      <article class="point-card" aria-labelledby="point1-title">
+        <div class="point-card-image-wrapper">
+          <img data-placeholder="acupressure-co4-hegu" data-context="Schematic drawing of a human hand showing the exact location of acupressure point CO4 (Hegu) located in the webbing between thumb and index finger, with a highlighted dot marking the precise spot, medical illustration style, clean line art with soft sage green accents on cream background" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="איור מיקום נקודת CO4 (הגו) על כף היד" class="point-card-image" loading="lazy" decoding="async" fetchpriority="low">
+        </div>
+        <div class="point-card-content">
+          <span class="point-number">נקודה 1</span>
+          <h2 id="point1-title" class="point-name">CO4 – הַא גוּ (Hegu)</h2>
+          <p class="point-nickname">"נקודת הפיקוד של הפנים והראש"</p>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">📍 מיקום מדויק</h3>
+            <p>בגב כף היד, במרכז הקמץ שבין אגודל לאצבע המורה. הנקודה נמצאת ממש בקצה העליון של השריר הבולט כאשר מצמידים את האגודל לאצבע.</p>
+          </div>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">⚡ אופן הפעולה</h3>
+            <p>CO4 היא נקודת מפתח להנעת צ'י ודם בראש ובפנים. היא משחררת חסימות אנרגטיות, מפחיתה כאב ומרגיעה את מערכת העצבים. ברפואה הסינית היא נחשבת לאחת הנקודות החזקות ביותר לשיכוך כאבי ראש מכל הסוגים.</p>
+          </div>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">🤲 הוראות לחיצה</h3>
+            <p>לחצו עם האגודל של היד השנייה בעומק בינוני למשך 30–60 שניות, תוך כדי נשימות עמוקות. ניתן לבצע 3–4 פעמים ביום, ובמיוחד בתחושת ניצוץ של מיגרנה מתקרבת. <strong>אזהרה:</strong> אין ללחוץ בזמן הריון.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: LIV3 -->
+      <article class="point-card" aria-labelledby="point2-title">
+        <div class="point-card-image-wrapper">
+          <img data-placeholder="acupressure-liv3-taichong" data-context="Schematic drawing of a human foot showing the exact location of acupressure point LIV3 (Tai Chong) on the top of the foot in the depression between the first and second metatarsal bones, with a highlighted dot, medical illustration style, clean line art with soft sage green accents on cream background" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="איור מיקום נקודת LIV3 (טאי צ'ונג) על כף הרגל" class="point-card-image" loading="lazy" decoding="async" fetchpriority="low">
+        </div>
+        <div class="point-card-content">
+          <span class="point-number">נקודה 2</span>
+          <h2 id="point2-title" class="point-name">LIV3 – טַאי צ'וֹנְג (Tai Chong)</h2>
+          <p class="point-nickname">"נקודת ההרגעה הגדולה"</p>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">📍 מיקום מדויק</h3>
+            <p>על גב כף הרגל, בשקע שבין עצמות האצבע הראשונה (בוהן) והשנייה. הנקודה נמצאת כ-2 אצבעות רוחב מהקמץ שבין האצבעות, לכיוון הקרסול.</p>
+          </div>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">⚡ אופן הפעולה</h3>
+            <p>LIV3 היא נקודת המפתח של מרידיאן הכבד. היא מזרימה צ'י כלוא, מפזרת תקיעות אנרגטית שגורמת לכאבי ראש, ומווסתת את זרימת הדם לראש. הנקודה ידועה במיוחד ביכולתה להרגיע מתח נפשי, עצבנות וכעס – טריגרים מרכזיים למיגרנות.</p>
+          </div>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">🤲 הוראות לחיצה</h3>
+            <p>לחצו עם האגודל בלחץ יציב ועמוק למשך 45–60 שניות על כל רגל. מומלץ לבצע בבוקר למניעה, ובערב להרגעה. הנקודה עשויה להיות רגישה – זוהי אינדיקציה טובה לכך שהיא זקוקה לעבודה.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: GB21 -->
+      <article class="point-card" aria-labelledby="point3-title">
+        <div class="point-card-image-wrapper">
+          <img data-placeholder="acupressure-gb21-jianjing" data-context="Schematic drawing of human upper back and shoulders showing the exact location of acupressure point GB21 (Jian Jing) at the highest point of the shoulder muscle, midway between the base of the neck and the tip of the shoulder, with a highlighted dot, medical illustration style, clean line art with soft sage green accents on cream background" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23FF0083;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23FF008320;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 font-family=%27Arial, sans-serif%27 font-size=%2716%27 fill=%27white%27 text-anchor=%27middle%27 dy=%27.3em%27 font-weight=%27500%27%3EClick%20to%20add%20image%3C/text%3E%3C/svg%3E" alt="איור מיקום נקודת GB21 (ג'יאן ג'ינג) בכתף" class="point-card-image" loading="lazy" decoding="async" fetchpriority="low">
+        </div>
+        <div class="point-card-content">
+          <span class="point-number">נקודה 3</span>
+          <h2 id="point3-title" class="point-name">GB21 – גְ'יַאן גִ'ינְג (Jian Jing)</h2>
+          <p class="point-nickname">"מעיין הכתף"</p>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">📍 מיקום מדויק</h3>
+            <p>בנקודה הגבוהה ביותר של שריר הטרפז בכתף, במרחק שווה בין בסיס הצוואר (חוליה C7) לבין קצה הכתף (אקרומיון). הנקודה נמצאת ממש במרכז ה"רכס" של הכתף.</p>
+          </div>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">⚡ אופן הפעולה</h3>
+            <p>GB21 היא נקודת צומת קריטית בין הראש לגוף. היא משחררת מתח כרוני בכתפיים ובצוואר – אזור שמהווה מקור מרכזי למיגרנות מתחיות. הנקודה מורידה אנרגיה עודפת מהראש, משפרת את זרימת הדם למוח, ומקלה על תחושת הכובד והלחץ בראש.</p>
+          </div>
+          
+          <div class="point-detail">
+            <h3 class="detail-heading">🤲 הוראות לחיצה</h3>
+            <p>לחצו עם האגודל או פרקי האצבעות בלחץ יציב למשך 30–45 שניות על כל כתף. ניתן להשתמש בכדור טניס צמוד לקיר לביצוע לחיצה עצמית. <strong>אזהרה:</strong> אין ללחוץ בזמן הריון – נקודה זו עלולה לעודד צירים.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Summary -->
+    <div class="blog-summary">
+      <h2 class="summary-title">שילוב לחיצות ביתיות עם טיפול מקצועי</h2>
+      <p>לחיצה על נקודות אקופרסורה היא כלי רב-עוצמה בארגז הכלים להתמודדות עם מיגרנות. עם זאת, חשוב להבין כי מדובר בטיפול משלים – ולא תחליף – לאבחון וטיפול מקצועי. במרכז שלנו, אנו משלבים דיקור סיני מדויק עם הדרכה אישית לביצוע לחיצות ביתיות, כך שתוכלו לקחת חלק פעיל בריפוי שלכם. טיפול מקצועי מאפשר לנו לזהות את שורש הבעיה, לטפל בחוסר האיזון הפנימי, ולהתאים לכם פרוטוקול טיפולי מלא.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="blog-cta-wrapper">
+      <a href="/contact" class="blog-cta-button" role="button" aria-label="קבעו ייעוץ טלפוני ללא עלות">
+        קבעו ייעוץ טלפוני ללא עלות
+        <span class="cta-arrow" aria-hidden="true">←</span>
+      </a>
+      <p class="cta-subtext">שיחת הכרות עם מטפל מוסמך – בואו להבין איך נוכל לעזור גם לכם</p>
+    </div>
+  </div>
+</section>
+
+
+
 
 
 
@@ -1493,6 +2027,10 @@
 </script>
 <div data-integration="accessibility:toolbar"></div>
     <script src="/script.js"></script>
+
+    <script id="zappy-font-awesome-loader">
+(function(){if(window.__zappyFontAwesomeLoader)return;window.__zappyFontAwesomeLoader=true;var href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';function load(){if(document.querySelector('link[href*="font-awesome"][href*="all.min.css"]'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=href;l.crossOrigin='anonymous';l.referrerPolicy='no-referrer';document.head.appendChild(l);}function schedule(){if('requestIdleCallback'in window){requestIdleCallback(load,{timeout:5000});}else{setTimeout(load,3500);}}['pointerdown','keydown','touchstart','mouseover'].forEach(function(evt){window.addEventListener(evt,load,{once:true,passive:true});});schedule();})();
+</script>
 
     <script id="zappy-mobile-submenu-script">
     (function() {
@@ -1686,5 +2224,4 @@
       else setTimeout(init,50);
     })();
     </script>
-</body>
-</html>
+</body></html>
